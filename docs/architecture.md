@@ -13,6 +13,8 @@ The number of layers follows how much work the human has. There is no fixed char
 
 A small setup drops the coordinator layer: human → main bot → lead. A large setup may add a layer. Say what the new layer is for. Do not add someone just to make the chart look even.
 
+The Knowledge Manager is optional and is not one of these four layers. It sits beside the coordinators, or beside the COO and the CTO, and it reports to the main bot. In the CEO shape that main bot is the chief of staff. It does not report to the COO or the CTO. It serves every bot. Details are in [knowledge-manager.md](knowledge-manager.md). You add the box only when the human asks for the role.
+
 ## Example: owner
 
 This is the founder/owner shape. The human is the owner. The main bot is their assistant. Coordinators are optional.
@@ -25,14 +27,16 @@ flowchart TD
   ops[Ops coordinator]
   a[Project A lead]
   b[Project B lead]
+  km[Knowledge Manager]
   user --> main
   main --> dev
   main --> ops
+  main --> km
   dev --> a
   ops --> b
 ```
 
-Arrows point down, along authority. Reports go up the same lines, one layer at a time.
+Arrows point down, along authority. Reports go up the same lines, one layer at a time. Omit the Knowledge Manager box when the human does not want that role. Any bot may ask it. That ask is not a report line.
 
 Use this when the human is running their own projects and wants a coordinator only where the work splits into dev and ops.
 
@@ -54,9 +58,11 @@ flowchart TD
   tx[Team Office X]
   ty[Team Office Y]
   tz[Team Office Z]
+  km[Knowledge Manager]
   ceo --> cos
   cos --> coo
   cos --> cto
+  cos --> km
   cto --> pa
   cto --> pb
   cto --> pc
@@ -65,13 +71,13 @@ flowchart TD
   coo --> tz
 ```
 
-Authority runs CEO → Chief of Staff → COO or CTO → office lead. Reports run back up, one layer at a time. A decision that needs a person goes to the CEO.
+Authority runs CEO → Chief of Staff → COO or CTO → office lead. Reports run back up, one layer at a time. A decision that needs a person goes to the CEO. Omit the Knowledge Manager box when the human does not want that role. It reports to the chief of staff, beside the COO and the CTO.
 
 Who coordinates, and who does the work:
 
 - The chief of staff, the COO, and the CTO coordinate and review direction. They do not run project QA or other project testing. They do not edit project repos.
 - The office lead does that office's work, updates its progress page and task board, and sends the eight-line report up one layer.
-- Offices do not message each other. Cross-office work goes up, then across.
+- Offices do not message each other. Cross-office work goes up, then across. A shared fact is the exception: any bot may ask the Knowledge Manager. That bot is not an office lead.
 
 A standing room, if you open one, is the chief of staff plus the COO and the CTO. The CEO joins only if they want to. Office leads stay out until someone names them. The cap is 6 members, including the main bot. See [operating-rules.md](operating-rules.md).
 
@@ -93,6 +99,8 @@ In the CEO shape this same bot is the chief of staff.
 
 The lead writes the lead's progress page. The main bot does not write it for them.
 
+When the plan includes a Knowledge Manager, the main bot writes the `knowledge/` skeleton once. After that, only the Knowledge Manager edits topic files. The markdown there is the source of truth. `index.db` is derived. Turning search over to the index later is one script, `build_index.py`. The directory, the front matter, the prompts, and the ask/answer messages stay as they are. See [knowledge-manager.md](knowledge-manager.md).
+
 Before the human agrees to the plan, the main bot does not create bots or channels. The main bot cannot create a GitHub repo. The main bot cannot delete a bot. The human deletes a bot from the sidebar.
 
 ### Coordinator
@@ -103,11 +111,15 @@ A coordinator does not direct a lead on another line. Cross-line work goes back 
 
 Reading a report means the report was read. Testing and QA stay inside the project.
 
+### Knowledge Manager
+
+Optional. Reports to the main bot, who is the chief of staff in the CEO shape. Sits beside the coordinators or beside the COO and the CTO. Does not report to them. Answers shared questions from `knowledge/*.md` and is the only writer of those topic files after the skeleton exists. Does not run a project, edit a task board, or edit a project repo. Any bot may `SendToAgent` it. It is not a lead, so that ask does not break the no-peer-lead rule. The search command and the ask format stay the same whether or not `index.db` exists. See [knowledge-manager.md](knowledge-manager.md).
+
 ### Lead
 
 Does the named scope. Keeps the progress page and the task board checkable. When a status changes, sends one eight-line report up one layer.
 
-A lead does not contact another lead. Ask the layer above.
+A lead does not contact another lead. Ask the layer above. A lead may `SendToAgent` the Knowledge Manager when that bot is on the roster. The Knowledge Manager is not a lead.
 
 A lead does not merge. Code changes go to a cloud coding agent, on a branch, delivered as a PR. See [operating-rules.md](operating-rules.md).
 
@@ -119,8 +131,9 @@ One layer at a time.
 - Owner shape, no coordinators: lead → main bot → human
 - CEO shape, software: project office lead → CTO → chief of staff → CEO
 - CEO shape, operations or content: team office lead → COO → chief of staff → CEO
+- Knowledge Manager → main bot → human. In the CEO shape the main bot is the chief of staff.
 
-Do not broadcast across layers. The layer above reads in-progress rows on the task board named in `Board`.
+Do not broadcast across layers. The layer above reads in-progress rows on the task board named in `Board`. An ask to the Knowledge Manager is not a broadcast. The answer comes back to the asker.
 
 ## Adding or removing a layer
 

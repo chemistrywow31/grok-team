@@ -43,6 +43,7 @@ On the first run, read these by URL, in this order, after this file and README.m
 2. [docs/operating-rules.md](docs/operating-rules.md)
 3. [docs/grok-bot-setup.md](docs/grok-bot-setup.md)
 4. [docs/interview.md](docs/interview.md)
+5. [docs/knowledge-manager.md](docs/knowledge-manager.md)
 
 On a later session, read the private memory repo first: `AGENTS.md`, `docs/architecture.md`, `docs/roster.md`, `docs/habits.md`, `docs/style.md`. Re-open a framework file only when the task depends on it.
 
@@ -54,7 +55,7 @@ Grok Bot behaviors that are not in [docs/grok-bot-setup.md](docs/grok-bot-setup.
 
 The human sends this repo's URL and asks you to read it, interview them, and build following this file. That is the README quick start. You create nothing until step 4.
 
-1. **Read.** Goal: README.md, this file, and the four docs above are read by URL. Exit when: you can name both example shapes from those pages. If a URL does not open, you already stopped.
+1. **Read.** Goal: README.md, this file, and the docs listed above are read by URL. Exit when: you can name both example shapes and say where an optional Knowledge Manager sits. If a URL does not open, you already stopped.
 2. **Interview.** Follow [docs/interview.md](docs/interview.md) through question 7. Goal: one question per turn, in the human's language. The human creates the private memory repo in question 7. You open it. You do not write it yet. Exit when: every item under "Known before you ask" is checked. You do not paste the question bank.
 3. **Plan.** Goal: one page in the format below, then stop. Exit when: you are waiting for a yes or a change.
 
@@ -64,6 +65,7 @@ Bots:
 Reporting:
 Decisions:
 Sensitivity:
+Knowledge: yes or no
 Language:
 Rooms:
 Memory repo:
@@ -94,8 +96,9 @@ You do not delete a bot. The human deletes it from the sidebar. You then update 
 ## What you write after a yes
 
 1. The memory repo, from [templates/memory-repo/AGENTS.md](templates/memory-repo/AGENTS.md). Delete the guidance lines. Record `preferred_language`.
-2. Each bot's long brief in that repo. The `CreateAgent` description stays one short paragraph and points at the memory repo. Templates: [templates/lead-brief.md](templates/lead-brief.md), [templates/coordinator-brief.md](templates/coordinator-brief.md).
-3. The bots, the channels, and the ids, in that order.
+2. Each bot's long brief in that repo. The `CreateAgent` description stays one short paragraph and points at the memory repo. Templates: [templates/lead-brief.md](templates/lead-brief.md), [templates/coordinator-brief.md](templates/coordinator-brief.md), and, when `Knowledge` is yes, [templates/knowledge-manager-brief.md](templates/knowledge-manager-brief.md).
+3. When `Knowledge` is yes, copy [templates/memory-repo/knowledge/](templates/memory-repo/knowledge/) into the memory repo once. After that skeleton exists, only the Knowledge Manager edits topic files. You do not turn on `index.db` unless the plan said to run `build_index.py`. The ask format does not change either way.
+4. The bots, the channels, and the ids, in that order. The Knowledge Manager, if any, reports to you.
 
 Ids do not go in this public repo or in a shared file.
 

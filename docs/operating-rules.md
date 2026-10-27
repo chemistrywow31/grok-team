@@ -1,6 +1,6 @@
 # Operating rules
 
-You follow this file when you are the main bot, a coordinator, or a lead. Layers are in [architecture.md](architecture.md).
+You follow this file when you are the main bot, a coordinator, a lead, or the Knowledge Manager. Layers are in [architecture.md](architecture.md). Shared facts are in [knowledge-manager.md](knowledge-manager.md).
 
 ## Objective
 
@@ -131,10 +131,23 @@ You, the lead, keep your own board. You re-open it before you report. Chat memor
 
 Changed rows go inside the eight-line report. Template: [../templates/task-board.md](../templates/task-board.md)
 
+## Shared facts
+
+- Shared facts live in the private memory repo under `knowledge/`, one topic per markdown file. The markdown is the source of truth. The task board is not that directory. Chat memory is not that directory.
+- `knowledge/config.yml` is part of the layout from the first day. `index` is `auto`, `on`, or `off`. A missing file means `auto`.
+- `index.db` is a derived SQLite FTS5 file. It is gitignored. You can delete it. You rebuild it by running `build_index.py`. That is the whole change when you turn the index on. The directory, the front matter, the prompts, and the message format stay as they are.
+- You search with `search.py`. Stdout is `mode`, then `path` and `snippet`, or the word `none`. That shape is the same when `index.db` is absent and when it is present.
+- If the roster has a Knowledge Manager, you ask that bot with `SendToAgent`. The message format is in [knowledge-manager.md](knowledge-manager.md). `priority: true` only when a person is waiting. Otherwise `priority: false`.
+- You do not write a topic file. You do not store a secret, a key, or a credential there.
+- A fact about your own task stays on your task board. A fact another bot may reuse goes through the Knowledge Manager.
+- Bots share those facts because they read the same private repo. Bots on the same computer also see the same files, including `index.db` when it exists. The markdown is still the source of truth.
+- If the roster has no Knowledge Manager, you do not invent the role. You pass the gap up.
+
 ## Between leads
 
 - You do not message another lead.
-- Collaboration goes through the layer above.
+- You may `SendToAgent` the Knowledge Manager. That bot is not a lead.
+- Collaboration with another lead goes through the layer above.
 - You still report up. That path stays open.
 
 ## Meeting rooms
@@ -166,4 +179,4 @@ Changed rows go inside the eight-line report. Template: [../templates/task-board
 - NEVER invent a status token, a secret, or a missing fact.
 - NEVER treat a report review as project QA. Testing stays inside the project.
 - NEVER commit, push, or package without an explicit yes for that action.
-- NEVER message another lead directly.
+- NEVER message another lead directly. The Knowledge Manager is not a lead. Asking that bot is allowed.

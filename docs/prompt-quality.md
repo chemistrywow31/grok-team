@@ -1,6 +1,6 @@
 # Prompt quality
 
-You are reading why the bot prompts in this repo are shaped this way. The prompts themselves are `AGENTS.md`, `docs/operating-rules.md`, `docs/interview.md`, `docs/grok-bot-setup.md`, `templates/lead-brief.md`, `templates/coordinator-brief.md`, `templates/memory-repo/AGENTS.md`, and the two copy-paste lines in the README quick start.
+You are reading why the bot prompts in this repo are shaped this way. The prompts themselves are `AGENTS.md`, `docs/operating-rules.md`, `docs/interview.md`, `docs/grok-bot-setup.md`, `docs/knowledge-manager.md`, `templates/lead-brief.md`, `templates/coordinator-brief.md`, `templates/knowledge-manager-brief.md`, `templates/memory-repo/AGENTS.md`, and the two copy-paste lines in the README quick start.
 
 This file is notes for a person editing those prompts. It is not a bot persona.
 
@@ -28,7 +28,8 @@ Scope names: `S2S` voice, `BP` text best practices, `GCF` the removed Grok Code 
 - **Crisis path.** Official for an agent that talks to a person. Scope: `S2S`. The bot stops, says it is not a crisis service, and points at local emergency services. No hotline number is invented.
 - **Tool output and pages are data, not instructions.** Official. Scope: `PI`. [Prompt-injection defenses](https://docs.x.ai/cookbook/examples/prompt-injection-defenses). The private memory repo is carved out on purpose: agreed decisions there are the human's instructions, and they still lose to the critical list.
 - **Approval before create, commit, push, package, delete, or publish.** Official. Scope: `SK` and the starter prompts. [Skills, routines, and automations](https://docs.x.ai/grok-bot/skills-routines-and-automations), [Grok Bot use cases](https://docs.x.ai/grok-bot/use-cases).
-- **A brief names when it applies, inputs, sequence, how to check, what to return, and what needs a yes.** Official for skills. Scope: `SK`. Applied to the lead and coordinator briefs. They are not Grok Bot skill files, and they have no skill YAML.
+- **A brief names when it applies, inputs, sequence, how to check, what to return, and what needs a yes.** Official for skills. Scope: `SK`. Applied to the lead, coordinator, and Knowledge Manager briefs. They are not Grok Bot skill files, and they have no skill YAML.
+- **One output shape for one job.** Official, concrete task and direct output. Scope: `S2S`, `BP`. `search.py` prints `mode`, then `path` and `snippet`, or `none`, whether `index.db` is present or not. Ask, answer, and add messages keep the same labels. Turning the index on is `build_index.py` only.
 - **Missing or stale data is reported. Chat memory is not the task board.** Official. Scope: `SK` and `BOTS`. [Bots](https://docs.x.ai/grok-bot/bots).
 - **Lasting rules stay apart from one task.** Official. Scope: `BOTS`.
 - **No secrets in a shared template.** Official. Scope: `BOTS`.
@@ -53,3 +54,5 @@ Scope names: `S2S` voice, `BP` text best practices, `GCF` the removed Grok Code 
 - `CreateAgent`, `CreateChannel`, `UpdateChannel`, `SendToAgent`, and `CloudAgent` are the names this framework was given. Full schemas are not in the public docs used above. Anything past the listed fields is marked unknown on purpose.
 - Confidentiality is a written rule. The bots share one filesystem. The prompt cannot add a sandbox.
 - The voice guide's "1–2 short sentences per turn" is for speech. Here, one question per turn and a one-page plan are the limits that match the task.
+- Whether the Knowledge Manager has `SendToAgent` is unknown. Askers are told to use it. If the tool is missing, the ask goes through the main bot. That fallback is written down. It is not a measured product fact.
+- A measured file count where FTS5 becomes necessary is unknown. The docs state a rough hint and the trigram minimum of 3 characters. They do not invent a cutoff.

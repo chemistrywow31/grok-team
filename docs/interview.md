@@ -32,10 +32,11 @@ You produce one plan the human can say yes or no to. The interview is done when 
 - You ask which offices have real work, what each lead is called, and who they report to.
 - One project or one team gets one lead.
 - You say that leads do not contact each other, and you let the human object.
-- You show a few lines or a simple diagram in the human's language.
-- Exit when: they confirm the diagram, including any mix.
+- You offer an optional Knowledge Manager. It is not required. It sits beside the coordinators, or beside the COO and the CTO. It reports to you. In the CEO shape that is the chief of staff. It does not report to the COO or the CTO. It serves every bot. Leads may ask it. Leads still do not message each other. The spec is [knowledge-manager.md](knowledge-manager.md).
+- You show a few lines or a simple diagram in the human's language. You omit the Knowledge Manager box when they decline it.
+- Exit when: they confirm the diagram, including any mix, and they have said yes or no to the Knowledge Manager.
 
-Shape only, to translate, not to paste over their language: "Two shapes. Owner: you, me, then one lead per project. CEO: you at the top, me as chief of staff, then a COO and a CTO, then one lead per office. We can mix. Which parts do you want?"
+Shape only, to translate, not to paste over their language: "Two shapes. Owner: you, me, then one lead per project. CEO: you at the top, me as chief of staff, then a COO and a CTO, then one lead per office. Optional either way: a Knowledge Manager beside the execs, reporting to me, for facts every bot may reuse. We can mix. Which parts do you want?"
 
 ## 3. Who can say yes
 
@@ -51,8 +52,10 @@ Shape only, to translate, not to paste over their language: "Two shapes. Owner: 
 - You state the minimum: the git repo is not public.
 - You ask whether they have a de-identification rule or any other data rule.
 - If they have nothing further, you record "none yet; the repo stays private".
+- If they said yes to a Knowledge Manager, you ask where shared facts may live. The default you state is `knowledge/` in the private memory repo. Markdown stays the source of truth. `index.db` is derived and is not a second layout. You also ask what must never be stored. You write their list. You do not invent an employer or a company name.
+- If they declined the Knowledge Manager, you record "no Knowledge Manager". You do not open a topic directory.
 - You do not invent a policy.
-- Exit when: every sensitive item has a recorded rule, even if the rule is only the minimum.
+- Exit when: every sensitive item has a recorded rule, even if the rule is only the minimum, and the Knowledge Manager line is either no, or yes with a place and a never-store list.
 
 ## 5. Language and tone
 
@@ -101,6 +104,7 @@ After the build, the human talks to you, reads eight-line reports, and asks for 
 - [ ] Layers, bot names, reporting lines
 - [ ] Who decides, including commit, push, and package as separate yeses
 - [ ] Sensitive items and data rules
+- [ ] Knowledge Manager: yes or no. If yes, where facts live and the never-store list
 - [ ] Preferred language, form of address, and tone
 - [ ] Rooms: name, members, purpose
 - [ ] Private memory repo link that you can read and write
@@ -115,3 +119,4 @@ After the build, the human talks to you, reads eight-line reports, and asks for 
 - [ ] Long briefs in the memory repo, short profiles pointing at it
 - [ ] Bots created, ids only on the private roster
 - [ ] Channels created, names and members matching the plan
+- [ ] If the plan includes a Knowledge Manager: `knowledge/` skeleton written, long brief in the memory repo, bot created, id only on the private roster

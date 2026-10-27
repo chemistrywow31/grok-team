@@ -11,13 +11,14 @@ Reporting, one layer at a time:
 - Project office lead → CTO → Chief of Staff → CEO
 - Team office lead → COO → Chief of Staff → CEO
 
-Project offices are software projects. Team offices are operations or content teams. Delete any row that has no work. Leads do not message each other.
+Project offices are software projects. Team offices are operations or content teams. Delete any row that has no work. Leads do not message each other. They may ask the Knowledge Manager. Delete that row when the human declined the role. It reports to the Chief of Staff, beside the COO and the CTO, not under them.
 
 | name | role | reports_to | id | channel |
 | --- | --- | --- | --- | --- |
 | Chief of Staff | main bot | CEO | (fill after creation) | (exec room, or blank) |
 | COO | exec | Chief of Staff | (fill after creation) | |
 | CTO | exec | Chief of Staff | (fill after creation) | |
+| Knowledge Manager | knowledge manager | Chief of Staff | (fill after creation) | |
 | Project Office A lead | lead | CTO | (fill after creation) | |
 | Project Office B lead | lead | CTO | (fill after creation) | |
 | Project Office C lead | lead | CTO | (fill after creation) | |
