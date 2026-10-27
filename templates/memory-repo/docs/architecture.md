@@ -1,28 +1,30 @@
 # Architecture
 
-> 指引：改成這位使用者同意的層級。空表等訪談後填。人少不必加協調層。寫完刪掉指引。
+> Guidance: replace this with the layers the human agreed to. Fill the tables after the interview. A small setup does not need a coordinator layer. Delete this guidance when you are done.
+
+Headings stay English. Cell text may be in the human's language.
 
 ## Layers
 
-（由上到下寫。例如：使用者 → 主 bot → 主管。人多才加協調層。）
+(Top to bottom. Owner shape: Human → Main bot → Lead. CEO shape: CEO → Chief of Staff → COO and CTO → office leads. A mix is allowed.)
 
 ## Reporting lines
 
-回報一次只往上一層。
+Reports go up one layer at a time.
 
 | name | reports_to | does | leaves alone |
 | --- | --- | --- | --- |
-| 主 bot | 使用者 | 協調、整理回報、維護這份記憶庫 | 不代主管寫進度頁 |
-| （主管名稱） | （上一層） | （點名的範圍） | 不直接找其他主管 |
+| Main bot | Human | coordinate, summarize reports, keep this memory repo | does not write a lead's progress page |
+| (lead name) | (layer above) | (the named scope) | does not message other leads |
 
 ## Decisions
 
 | date | decision | why |
 | --- | --- | --- |
-| YYYY-MM-DD | （決定，一句） | （原因，一句） |
+| YYYY-MM-DD | (one sentence) | (one sentence) |
 
 ## Sensitivity
 
 | project | repo visibility | data rule |
 | --- | --- | --- |
-| （名稱） | private 或 public | （使用者定的規則。沒另訂就寫：只有 repo 不公開） |
+| (name) | private or public | (the human's rule. If they set none, write: repo stays private) |

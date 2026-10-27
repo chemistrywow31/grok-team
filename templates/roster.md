@@ -1,13 +1,17 @@
 # Roster
 
-> 指引：複製到使用者的私人記憶庫後再填。id 只放那份私人檔。這個公開模板不填真的 id。填完刪掉指引。
+> Guidance: copy this into the human's private memory repo before you fill it in. Ids go only in that private file. This public template has no real ids. Delete this guidance after you copy it.
 
-bot 在被告訴之前不知道彼此的 id。建立之後把 id 寫進私人名單，並告訴該 bot 它的回報對象。
+`preferred_language`: (set in the interview, for example `en` or `zh-TW`)
+
+A bot does not know the others' ids until it is told. After you create a bot, write the id here and tell that bot who it reports to.
 
 | name | role | reports_to | id | channel |
 | --- | --- | --- | --- | --- |
-| 主 bot | 特助 | 使用者 | （建立後填） | （高層房間名稱，沒有就空） |
-| 開發協調 bot | 協調 | 主 bot | （建立後填） | |
-| 專案 A 主管 | 主管 | 開發協調 bot | （建立後填） | |
+| Main bot | main bot | Human | (fill after creation) | (war room name, or blank) |
+| Dev coordinator | coordinator | Main bot | (fill after creation) | |
+| Project A lead | lead | Dev coordinator | (fill after creation) | |
 
-`role` 用：主 bot、協調、主管，或使用者另外定的名字。`reports_to` 寫上一層的 name。沒有協調層時，主管的 `reports_to` 是主 bot。
+`role` is `main bot`, `coordinator`, `exec`, or `lead`, or a name the human chose. `reports_to` is the name of the layer above. With no coordinator layer, a lead's `reports_to` is the main bot.
+
+The CEO shape has its own sample: [roster-ceo-example.md](roster-ceo-example.md).

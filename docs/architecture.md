@@ -1,26 +1,30 @@
-# 層級
+# Layers
 
-層數看使用者的事情有多少，沒有固定編制。這份講誰在哪一層、做什麼、回報往哪走。日常規則見 [operating-rules.md](operating-rules.md)。
+You read this file when the human is choosing layers. The two diagrams are examples. You copy a box into the plan only when the human asks for it. You do not create a bot from this file. Creation waits for a yes, in [../AGENTS.md](../AGENTS.md).
 
-## 可以由上到下的四層
+The number of layers follows how much work the human has. There is no fixed chart. This file says who sits where, what they do, and which way reports travel. Day-to-day rules are in [operating-rules.md](operating-rules.md). The short version of both pictures is in the README, in both languages.
 
-1. **使用者** — 做決定的人。登入和金鑰由使用者本人處理。
-2. **主 bot** — 特助。訪談、寫計畫、建立 bot 和頻道、維護私人記憶庫、把下面的回報整理給使用者。
-3. **協調層** — 可選。例如開發協調 bot、營運協調 bot。對下一層給建議，收八行回報，再往上交結果和方向。
-4. **主管** — 一個專案一個主管 bot。自己的進度頁（Page）和任務板，自己更新。
+## Four layers you can use
 
-事情少，拿掉協調層：使用者 → 主 bot → 主管。事情多，可以再加層。加層要說得清這一層管什麼。不要為了看起來整齊而加人。
+1. **Human** — the person who decides. The human handles login and keys in person.
+2. **Main bot** — the assistant. Interviews, writes the plan, creates bots and channels, keeps the private memory repo, and turns reports into something the human can read.
+3. **Coordinators** — optional. In the owner shape, a dev coordinator and an ops coordinator. In the CEO shape, the COO and the CTO, under the chief of staff. They advise the next layer down, collect eight-line reports, and send results and direction up.
+4. **Leads** — one lead bot per project or team. Each lead updates its own progress page (Page) and its own task board.
 
-下面是例子。實際層級以訪談結果為準。
+A small setup drops the coordinator layer: human → main bot → lead. A large setup may add a layer. Say what the new layer is for. Do not add someone just to make the chart look even.
+
+## Example: owner
+
+This is the founder/owner shape. The human is the owner. The main bot is their assistant. Coordinators are optional.
 
 ```mermaid
 flowchart TD
-  user[使用者]
-  main[主 bot]
-  dev[開發協調 bot]
-  ops[營運協調 bot]
-  a[專案 A 主管]
-  b[專案 B 主管]
+  user[User]
+  main[Main bot]
+  dev[Dev coordinator]
+  ops[Ops coordinator]
+  a[Project A lead]
+  b[Project B lead]
   user --> main
   main --> dev
   main --> ops
@@ -28,47 +32,98 @@ flowchart TD
   ops --> b
 ```
 
-## 各層的工作
+Arrows point down, along authority. Reports go up the same lines, one layer at a time.
 
-### 使用者
+Use this when the human is running their own projects and wants a coordinator only where the work splits into dev and ops.
 
-決定組織、敏感資料的規則、以及 commit、push、打包這類要點頭的事。使用者不用自己追每張任務板。
+## Example: CEO
 
-### 主 bot
+This is the CEO shape, with two exec layers under the human: the chief of staff, then the COO and the CTO. Office leads sit under the exec who matches the work.
 
-對使用者負責。它協調、追進度、把回報收成使用者能看的結論。它也維護私人記憶庫。
+The human is the CEO. The main bot already in the account is the chief of staff. Do not create a second chief of staff. Software projects go under the CTO, one project office and one lead each. Operations and content go under the COO, one team office and one lead each. The names Project Office A/B/C and Team Office X/Y/Z are placeholders. Keep a row only when that office has work.
 
-主管的進度頁由主管自己寫。主 bot 不代寫。
+```mermaid
+flowchart TD
+  ceo[CEO]
+  cos[Chief of Staff]
+  coo[COO]
+  cto[CTO]
+  pa[Project Office A]
+  pb[Project Office B]
+  pc[Project Office C]
+  tx[Team Office X]
+  ty[Team Office Y]
+  tz[Team Office Z]
+  ceo --> cos
+  cos --> coo
+  cos --> cto
+  cto --> pa
+  cto --> pb
+  cto --> pc
+  coo --> tx
+  coo --> ty
+  coo --> tz
+```
 
-使用者同意計畫之前，主 bot 不建立 bot 或頻道。GitHub repo 主 bot 目前建不了。bot 主 bot 刪不了，要使用者從側邊欄刪。
+Authority runs CEO → Chief of Staff → COO or CTO → office lead. Reports run back up, one layer at a time. A decision that needs a person goes to the CEO.
 
-### 協調 bot
+Who coordinates, and who does the work:
 
-看下一層的結果和方向，給建議，再交上一層。建議停在建議。repo 由使用者決定要不要改，協調 bot 不動。
+- The chief of staff, the COO, and the CTO coordinate and review direction. They do not run project QA or other project testing. They do not edit project repos.
+- The office lead does that office's work, updates its progress page and task board, and sends the eight-line report up one layer.
+- Offices do not message each other. Cross-office work goes up, then across.
 
-協調 bot 不指揮別條線的主管。跨線的事交回主 bot。
+A standing room, if you open one, is the chief of staff plus the COO and the CTO. The CEO joins only if they want to. Office leads stay out until someone names them. The cap is 6 members, including the main bot. See [operating-rules.md](operating-rules.md).
 
-看過回報，只表示看過回報。專案裡的測試和品管由該專案自己做。
+A blank roster for this picture: [../templates/roster-ceo-example.md](../templates/roster-ceo-example.md).
 
-### 主管
+The human may mix the two shapes. A CEO who has only software can skip the COO. An owner who later hires exec bots can add the second exec layer. Write the mix into the plan and wait for a yes.
 
-做點名範圍裡的事。進度頁和任務板保持可核對。狀態有變，就向上一層交八行回報。
+## What each layer does
 
-主管不直接聯絡其他主管。需要別的專案，請上一層轉。
+### Human
 
-主管不自己 clone repo，也不自己 merge。程式改動交給 cloud coding agent，在分支上做，用 PR 交付。見 [operating-rules.md](operating-rules.md)。
+Decides the organization, the rules for sensitive data, and the moments that need a yes: commit, push, and packaging. The human does not have to chase every task board.
 
-## 回報方向
+### Main bot
 
-一次只往上一層。
+Answers to the human. Coordinates, follows up, and turns reports into a conclusion the human can check. Keeps the private memory repo.
 
-- 有協調層：主管 → 該線的協調 bot → 主 bot → 使用者
-- 沒有協調層：主管 → 主 bot → 使用者
+In the CEO shape this same bot is the chief of staff.
 
-不要跨層群發。上一層要看進行中的項目，打開回報裡的 Board 所指的任務板。
+The lead writes the lead's progress page. The main bot does not write it for them.
 
-## 加減層
+Before the human agrees to the plan, the main bot does not create bots or channels. The main bot cannot create a GitHub repo. The main bot cannot delete a bot. The human deletes a bot from the sidebar.
 
-先寫短計畫：加誰或拿掉誰、回報線怎麼改、哪些頻道要改成員。使用者點頭後，主 bot 才建立 bot 或用 UpdateChannel 改成員。
+### Coordinator
 
-拿掉某個 bot 時，主 bot 請使用者從側邊欄刪除，然後改私人名單。頻道名稱不能改。人要換房間，就開新頻道，舊頻道怎麼處理問使用者。能不能刪頻道，目前不知道。
+A coordinator is the dev coordinator, the ops coordinator, the COO, or the CTO. They read the next layer's results and direction, give advice, and send that up. Advice stays advice. The human decides whether a repo changes. The coordinator does not edit it.
+
+A coordinator does not direct a lead on another line. Cross-line work goes back to the main bot.
+
+Reading a report means the report was read. Testing and QA stay inside the project.
+
+### Lead
+
+Does the named scope. Keeps the progress page and the task board checkable. When a status changes, sends one eight-line report up one layer.
+
+A lead does not contact another lead. Ask the layer above.
+
+A lead does not clone a repo and does not merge. Code changes go to a cloud coding agent, on a branch, delivered as a PR. See [operating-rules.md](operating-rules.md).
+
+## Reporting direction
+
+One layer at a time.
+
+- Owner shape, with coordinators: lead → that line's coordinator → main bot → human
+- Owner shape, no coordinators: lead → main bot → human
+- CEO shape, software: project office lead → CTO → chief of staff → CEO
+- CEO shape, operations or content: team office lead → COO → chief of staff → CEO
+
+Do not broadcast across layers. The layer above reads in-progress rows on the task board named in `Board`.
+
+## Adding or removing a layer
+
+Write a short plan: who is added or removed, how the reporting lines change, and which channels change members. After a yes, the main bot creates bots or changes members with `UpdateChannel`.
+
+To remove a bot, the main bot asks the human to delete it from the sidebar, then updates the private roster. A channel name cannot be changed. To move people into a new room, open a new channel and ask the human what to do with the old one. Whether a channel can be deleted is unknown.

@@ -1,20 +1,20 @@
 # Habits
 
-> 指引：一條習慣一句話。寫使用者希望什麼。不貼聊天記錄。沒問到的留空，不要猜。寫完刪掉指引。
+> Guidance: one habit, one sentence, in the human's language. Write what the human wants. Do not paste a chat log. Leave unknown lines blank. Do not guess. Delete this guidance when you are done.
 
-## 稱呼
+## Form of address
 
-- 怎麼叫使用者：
+- What to call the human:
 
-## 做事
+## How work goes
 
-- 怎樣算同意了：
-- 主 bot 可以自己做的事：
-- 一定要先問的事：
-- commit / push / package：
+- What counts as a yes:
+- What the main bot may do on its own:
+- What always waits for a question:
+- commit / push / package:
 
-## 紀錄
+## Log
 
 | date | habit |
 | --- | --- |
-| YYYY-MM-DD | （一句。例如：先講現況，再給一個建議） |
+| YYYY-MM-DD | (one sentence, for example: state the situation, then one recommendation) |

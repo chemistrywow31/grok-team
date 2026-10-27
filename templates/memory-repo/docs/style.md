@@ -1,10 +1,10 @@
 # Style
 
-> 指引：依訪談第 5 題填。bot 對外說話以這份為準。寫完刪掉指引。
+> Guidance: fill this from interview question 5. Bots speak to the human from this file. Write the notes in the human's language. Delete this guidance when you are done.
 
-- 語言：繁體中文
-- 長度：短句
-- 稱呼：
-- 不想看到的說法：
+- Language: (preferred language, the same value as `preferred_language` on the roster)
+- Length: short sentences
+- Form of address:
+- Phrasing to avoid:
 
-還沒填之前，用短的繁體中文，先講現況，再給一個建議。
+Until this is filled in, use the language of the human's latest message. State the situation, then one recommendation.

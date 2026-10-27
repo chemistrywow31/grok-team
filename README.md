@@ -8,19 +8,26 @@
 
 這是給 Grok Bot 主 bot 用的組織框架。一位使用者可以有很多 bot，每個 bot 有自己的對話和記憶，檔案在同一台電腦上。主 bot 讀完這裡，訪談使用者，再一起訂出這個人自己的 bot 組織。
 
-只寫給 Grok Bot。
+只寫給 Grok Bot。其餘文件是英文，給 bot 讀。你看這份中文就夠。你跟 bot 說話，用你自己的語言。
 
-### 怎麼開始
+### 快速開始
 
-1. 開一個 private 的 GitHub repo，當組織的記憶庫。
-2. 把這個 grok-team repo 的連結給主 bot。
-3. 跟主 bot 說：「讀這份，然後訪談我。」
+1. 把這個 repo 的網址貼給你的主 bot，連同這段話一起貼：
 
-主 bot 一次問一題，先交出計畫。你點頭之後，它才建立 bot 和頻道。題目在 [docs/interview.md](docs/interview.md)。
+   ```
+   先把這個 repo 讀完，照 AGENTS.md 一次問我一題。計畫寫給我看。我明確同意之前，一個 bot 都先不要建。
+   ```
+
+2. 主 bot 會讀 `AGENTS.md` 和 docs，再依 [docs/interview.md](docs/interview.md) 一次問一題。它會拿出兩種編制讓你選或混用：自己當頭，或 CEO 底下兩層主管。然後寫一份計畫。你同意之前，它不會建立任何 bot。
+3. 問到記憶庫時，你自己開一個 private 的 GitHub repo，並讓主 bot 讀得到、寫得進。它不能自己開 repo。原因在下面「記憶掉了怎麼辦」。
+4. 你同意計畫之後，主 bot 才用 templates 寫入記憶庫、建立協調 bot 和主管 bot、填名單。bot 的 id 只放在那份私人名單。
+5. 第一天做三件事：跟主 bot 講話、看往上送的八行回報、規則要改就先講一聲。你同意之後，它才改私人記憶庫裡的規則。
 
 ### 範例組織
 
-要幾層，看事情有多少。事情少，使用者 → 主 bot → 主管 就夠。事情多，可以在中間加協調層，也可以再加別的層。下面只是例子。
+要幾層，看事情有多少。事情少，使用者 → 主 bot → 主管 就夠。事情多，中間再加層。下面兩種都是例子，可以挑一種，也可以拆開再組。
+
+#### 例子：自己當頭
 
 ```mermaid
 flowchart TD
@@ -44,6 +51,39 @@ flowchart TD
 - 一個專案一個主管 bot。主管自己更新自己的進度頁。主管之間不直接聯絡，合作請上一層轉。
 - 主 bot 和協調 bot 看結果和方向。專案裡的測試和品管，由那個專案自己做。
 
+#### 例子：CEO
+
+人是 CEO。你已經有的主 bot 就是特助，不必再蓋一個。特助下面是 COO 和 CTO。CTO 管軟體，一個專案一間專案室。COO 管營運和內容，一個團隊一間團隊室。A、B、C、X、Y、Z 是代號，有工作才留。
+
+```mermaid
+flowchart TD
+  ceo[CEO]
+  cos[特助]
+  coo[COO]
+  cto[CTO]
+  pa[專案室 A]
+  pb[專案室 B]
+  pc[專案室 C]
+  tx[團隊室 X]
+  ty[團隊室 Y]
+  tz[團隊室 Z]
+  ceo --> cos
+  cos --> coo
+  cos --> cto
+  cto --> pa
+  cto --> pb
+  cto --> pc
+  coo --> tx
+  coo --> ty
+  coo --> tz
+```
+
+管轄是 CEO → 特助 → COO 或 CTO → 室主管。回報倒著走，一次一層。要人拍板的事回到 CEO。
+
+特助、COO、CTO 只協調、看方向。他們不做專案裡的測試或品管，也不改專案 repo。各室主管做該室的事，自己更新進度頁和任務板。室跟室不直接找，請上一層轉。
+
+說明在 [docs/architecture.md](docs/architecture.md#example-ceo)。空的名單在 [templates/roster-ceo-example.md](templates/roster-ceo-example.md)。
+
 主管底下如果要再放一組團隊檔，看 A-Team 的 `grok-native` 分支當參考。那個專案會產出團隊：小專案用精簡流程（small office），大約 3 到 4 個階段、3 到 5 位專員，一個階段一份紀錄；大專案用完整流程。這裡只放連結：
 
 https://github.com/chemistrywow31/A-Team/tree/chemistrywow31/grok-native
@@ -62,14 +102,18 @@ Bot 會忘。一次摘要、一段新對話，講好的事可能就沒了。架�
 
 ### 其他文件
 
-- [AGENTS.md](AGENTS.md) — 主 bot 的入口
-- [docs/architecture.md](docs/architecture.md) — 層級、誰做什麼
+這些檔是英文。
+
+- [AGENTS.md](AGENTS.md) — 主 bot 的入口，含訪談順序和語言規則
+- [docs/architecture.md](docs/architecture.md) — 層級，以及上面兩種例子
 - [docs/operating-rules.md](docs/operating-rules.md) — 共同規則、八行回報、任務板、會議室
-- [docs/interview.md](docs/interview.md) — 訪談題庫和收尾清單
+- [docs/interview.md](docs/interview.md) — 訪談題庫。兩種編制都要拿出來選
 - [docs/grok-bot-setup.md](docs/grok-bot-setup.md) — 建立 bot、頻道、傳話，以及已知限制
+- [docs/prompt-quality.md](docs/prompt-quality.md) — 這些提示詞依了哪些寫法，以及刻意沒採用哪些
 - [templates/lead-brief.md](templates/lead-brief.md) — 主管簡述
 - [templates/coordinator-brief.md](templates/coordinator-brief.md) — 協調簡述
 - [templates/roster.md](templates/roster.md) — 名單
+- [templates/roster-ceo-example.md](templates/roster-ceo-example.md) — CEO 編制的名單例子
 - [templates/report-8-lines.md](templates/report-8-lines.md) — 八行回報
 - [templates/task-board.md](templates/task-board.md) — 任務板
 - [templates/memory-repo/AGENTS.md](templates/memory-repo/AGENTS.md) — 私人記憶庫骨架
@@ -80,19 +124,26 @@ Bot 會忘。一次摘要、一段新對話，講好的事可能就沒了。架�
 
 A framework for the main bot in Grok Bot. One person can run many bots. Each bot has its own chat and its own memory, and they share one computer's files. The main bot reads this repo, interviews that person, and helps them lay out their own bots.
 
-Written for Grok Bot only.
+Written for Grok Bot only. The rest of the files are English, which is what the bots read. You talk to them in your own language.
 
-### How to start
+### Quick start
 
-1. Create a private GitHub repo. That repo is the organization's memory.
-2. Give the main bot the link to this grok-team repo.
-3. Say: "Read this and interview me."
+1. Send your main bot the URL of this repo, plus this message:
 
-The main bot asks one question at a time, then writes a short plan. It creates bots and channels only after you agree. The questions are in [docs/interview.md](docs/interview.md).
+   ```
+   Read this repo, then interview me one question at a time following AGENTS.md. Show me the plan. Do not create any bot until I explicitly say yes.
+   ```
+
+2. It reads `AGENTS.md` and the docs, then interviews you from [docs/interview.md](docs/interview.md), one question at a time. It offers two shapes, a founder/owner layout and a CEO layout with two exec layers, and you can pick or mix. It writes a plan. The bot creates nothing until you agree.
+3. During the interview, create one private GitHub repo for memory and grant the bot access. The main bot cannot create that repo. The reason is under "When memory drops out" below.
+4. After you agree, the main bot writes that memory repo from the templates, creates the coordinator and lead bots, and fills in the roster. Bot ids stay in the private roster.
+5. On the first day, do three things: talk to the main bot, read the eight-line reports that come up, and say so if a rule needs a change. The bot writes the change into your private memory repo only after you agree.
 
 ### An example organization
 
-The number of layers follows the amount of work. A small setup is user → main bot → lead. A larger one can add coordinators, or further layers. The chart is an example.
+How many layers you need follows the amount of work. A small setup is user → main bot → lead. A larger one adds layers. The two charts below are examples. Use one, or take pieces from both.
+
+#### Example: owner
 
 ```mermaid
 flowchart TD
@@ -116,6 +167,39 @@ Arrows point down the chain of authority. Reports go back up that chain, one lay
 - One project gets one lead bot. The lead updates its own progress page. Leads do not message each other. Work between them goes through the layer above.
 - The main bot and the coordinators review results and direction. Testing and QA stay inside the project.
 
+#### Example: CEO
+
+The human is the CEO. The main bot already on the account is the chief of staff, so do not create another one. A COO bot and a CTO bot report to that chief of staff. Software projects sit under the CTO, one project office each. Operations and content sit under the COO, one team office each. A, B, C, X, Y, and Z are stand-in names. Keep a box only when there is work for it.
+
+```mermaid
+flowchart TD
+  ceo[CEO]
+  cos[Chief of Staff]
+  coo[COO]
+  cto[CTO]
+  pa[Project Office A]
+  pb[Project Office B]
+  pc[Project Office C]
+  tx[Team Office X]
+  ty[Team Office Y]
+  tz[Team Office Z]
+  ceo --> cos
+  cos --> coo
+  cos --> cto
+  cto --> pa
+  cto --> pb
+  cto --> pc
+  coo --> tx
+  coo --> ty
+  coo --> tz
+```
+
+Authority runs CEO → Chief of Staff → COO or CTO → office lead. Reports travel back up, one layer at a time. A choice that needs a person goes back to the CEO.
+
+The chief of staff, the COO, and the CTO coordinate and review. They do not run project QA, and they do not edit project repos. The office lead does that office's work and keeps its progress page and task board. Offices do not message each other. They ask the layer above.
+
+The long version is in [docs/architecture.md](docs/architecture.md#example-ceo). A blank roster is in [templates/roster-ceo-example.md](templates/roster-ceo-example.md).
+
 When a lead needs files for a team under that project, use the A-Team `grok-native` branch as a pointer. That project generates teams. Small work there uses a short flow (small office): about three or four stages, three to five specialists, one record per stage. Large work uses the full flow. The link is only a pointer:
 
 https://github.com/chemistrywow31/A-Team/tree/chemistrywow31/grok-native
@@ -134,14 +218,18 @@ A group chat is a meeting room. The cap is six members, and the main bot counts 
 
 ### Other docs
 
-- [AGENTS.md](AGENTS.md) — entry file for the main bot
-- [docs/architecture.md](docs/architecture.md) — layers and who does what
+These files are English.
+
+- [AGENTS.md](AGENTS.md) — entry file for the main bot: interview order and the language rule
+- [docs/architecture.md](docs/architecture.md) — layers, including both example shapes
 - [docs/operating-rules.md](docs/operating-rules.md) — shared rules, the eight-line report, the task board, meeting rooms
-- [docs/interview.md](docs/interview.md) — question bank and closing checklist
+- [docs/interview.md](docs/interview.md) — question bank; offer both shapes
 - [docs/grok-bot-setup.md](docs/grok-bot-setup.md) — creating bots and channels, sending messages, known limits
+- [docs/prompt-quality.md](docs/prompt-quality.md) — which prompt rules this repo follows, and which it leaves out
 - [templates/lead-brief.md](templates/lead-brief.md) — lead brief
 - [templates/coordinator-brief.md](templates/coordinator-brief.md) — coordinator brief
 - [templates/roster.md](templates/roster.md) — roster
+- [templates/roster-ceo-example.md](templates/roster-ceo-example.md) — sample roster for the CEO shape
 - [templates/report-8-lines.md](templates/report-8-lines.md) — eight-line report
 - [templates/task-board.md](templates/task-board.md) — task board
 - [templates/memory-repo/AGENTS.md](templates/memory-repo/AGENTS.md) — skeleton for the private memory repo

@@ -1,8 +1,8 @@
-# 八行回報
+# Eight-line report
 
-> 指引：狀態有變就填一張，只交給上一層。不要加行，不要貼整張任務板，不要貼對話。用的時候可以刪掉這段指引。
+> Guidance: fill one in when a status changes, and send it up one layer only. Do not add lines, do not paste the whole task board, and do not paste the chat. Delete this guidance when you use the block.
 
-標籤保持英文，順序不動。有內容寫中文。該行沒有內容就寫 `none` 這一個字。`Next` 只寫一個建議。
+Keep the English labels, in this order. Write values in the human's language, because the human reads the report. A line with nothing on it is the single word `none`. `Next` is one suggestion.
 
 ```
 Team: {{TEAM}}
@@ -15,13 +15,26 @@ Done: none
 Next: {{ONE_SUGGESTION}}
 ```
 
-- `Team`：你的名字
-- `Board`：任務板位置。上一層從這裡看 `IN_PROGRESS`
-- `Updated`：日期，例如 `YYYY-MM-DD`
-- `Needs human`：要人拍板才寫，並寫要決定什麼
-- `Blocked`：任務名稱加原因
-- `Needs context`：缺什麼。上一層補得上、還不用人拍板的放這裡
-- `Done`：完成的任務。有疑慮寫在同一行
-- `Next`：一個建議
+Shape you copy. Do not copy the office name unless that office is really yours. Do not copy a sample sentence into a report whose language is not English. Translate the values. Leave the labels and `none` as written.
 
-進行中的項目不另開一行。規則見 [../docs/operating-rules.md](../docs/operating-rules.md)。
+```
+Team: Project Office A
+Board: Project Office A task board
+Updated: YYYY-MM-DD
+Needs human: none
+Blocked: none
+Needs context: none
+Done: none
+Next: (one suggestion in the human's language)
+```
+
+- `Team`: your name
+- `Board`: where the task board is. The next layer reads `IN_PROGRESS` there
+- `Updated`: a date, such as `YYYY-MM-DD`
+- `Needs human`: only when a person must choose, and what the choice is
+- `Blocked`: task name plus the reason
+- `Needs context`: what is missing. Use this when the layer above can supply it and no person has to choose yet
+- `Done`: finished tasks. A concern stays on this same line
+- `Next`: one suggestion
+
+In-progress items do not get their own line. The rules are in [../docs/operating-rules.md](../docs/operating-rules.md).

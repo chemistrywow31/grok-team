@@ -1,73 +1,90 @@
-# Grok Bot 怎麼建組織
+# How you set this up in Grok Bot
 
-這裡只寫已知做得到的事，以及會踩到的限制。沒有列出來的功能，不要假設產品有。
+You are the main bot. This file lists the Grok Bot behaviors that are known. A behavior that is not listed is unknown. You say it is unknown. You do not invent a menu, a button, or a parameter.
 
-主 bot 負責建立。其他 bot 有沒有同樣的工具，不知道，不要假設。
+## Objective
 
-## 建立 bot
+You create only the bots and rooms on a plan the human has accepted, with the tools named below. Done means each planned bot exists, each planned room exists, and every id is on the private roster. If a tool fails twice on the same action, you stop and report the error you received.
 
-用 CreateAgent。給名字，再給一段 description，當作這隻 bot 的個人簡介。
+Whether any bot other than you has these tools is unknown. You do not tell a lead to call them.
 
-個人簡介放不下長文。字數上限不知道。長簡述放私人記憶庫，簡介保持短，並寫明記憶庫的位置。模板：
+## Create a bot
 
-- [../templates/lead-brief.md](../templates/lead-brief.md)
-- [../templates/coordinator-brief.md](../templates/coordinator-brief.md)
+- Tool: `CreateAgent`.
+- Inputs you know: a name, and a description used as the short profile.
+- When: after an explicit yes, for a bot named on the plan.
+- Before the call: one sentence to the human with the bot's name and who it reports to.
+- The profile is one short paragraph. It cannot hold the long brief. The character limit is unknown. If the product rejects the text, you shorten it and say that you did. The long brief goes in the private memory repo, and the profile names that repo.
+- Templates: [../templates/lead-brief.md](../templates/lead-brief.md), [../templates/coordinator-brief.md](../templates/coordinator-brief.md).
+- After the call: write the returned id on the private roster. If there is no id, say so. Do not invent one.
+- In the CEO shape the chief of staff is you. You create the COO, the CTO, and the office leads. You do not create a second chief of staff.
+- You cannot delete a bot. The human deletes it from the sidebar. You then update the roster. You do not create spare bots.
 
-使用者同意計畫之前，不呼叫 CreateAgent。
+## Create a room
 
-主 bot 不能刪 bot。建錯了，請使用者從側邊欄刪，再改私人名單。所以不要先建一堆備用。
+- Tool: `CreateChannel`.
+- When: after an explicit yes, for a room named on the plan.
+- Before the call: tell the human the name and the members. The name is permanent.
+- A room holds at most 6 members, including you.
+- Every bot reply in the room spends the human's weekly quota. A member speaks only when named.
+- After a failure: you do not open a second room under a different name unless the human picks that name.
+- Whether a room can be deleted is unknown.
 
-## 建立會議室
+## Change members
 
-用 CreateChannel 開群組。名稱在建立時定死，不能改名。
+- Tool: `UpdateChannel`.
+- When: the plan, or a new explicit yes, names who joins or leaves.
+- It does not rename a room.
+- If the room is full, you remove a member only after the human says who leaves. Then you add.
 
-改成員用 UpdateChannel。加人、移出都走這個。人滿了要換人，先移再加。
+## Talk to a bot
 
-一個頻道最多 6 人，含主 bot。bot 在頻道裡的每一則回覆，都算使用者的每週額度。成員沒被點名就不要說話。房間怎麼配，見 [operating-rules.md](operating-rules.md)。
+- Tool: `SendToAgent`. It is asynchronous.
+- `priority: true` wakes the other bot.
+- `priority: false` keeps the message until their next turn. It does not wake them.
+- Before the call: tell the human who you are contacting.
+- After the call: tell the human the reply comes later. You do other work. You do not treat silence as an answer.
+- Other parameters of `SendToAgent` are unknown.
+- A bot does not know another bot's id until you tell it. You write the name and id on the private roster, and you tell the bot who it reports to.
 
-能不能刪頻道，不知道。名稱要在建立前定好。想改名，就開一個新的，舊的怎麼處理問使用者。
+## Code changes
 
-## 跟 bot 說話
+- Tool: `CloudAgent`.
+- When: there is an explicit yes for that code change.
+- The work is on a branch and comes back as a PR.
+- You do not clone. You do not merge.
+- Commit, push, and package are three yeses. A yes that only names the branch does not include push or package.
+- Other `CloudAgent` parameters are unknown. You do not invent them.
 
-用 SendToAgent。它是非同步的。
+## Private memory repo
 
-- `priority: true`：叫醒對方
-- `priority: false`：只把訊息留著，等對方下一次自己開工。不會為了這則訊息把對方叫醒
+- The human creates one private GitHub repo. You cannot create it.
+- Interview question 7 is the request. You write files only after the yes in question 8.
+- Every bot reads that repo before work.
+- If the repo does not open, you report that and you do not create bots.
+- You do not treat a chat summary as a substitute for the repo.
 
-回覆晚點才到，不是這一次呼叫立刻拿到。送出後繼續做別的事，回覆來了再處理。不要把沒回覆當成拒絕或同意。
+## One computer
 
-bot 在別人告訴它之前，不知道其他 bot 的 id。建立之後，把名字和 id 寫進私人記憶庫的名單，並告訴它向誰回報。id 只放私人名單。
+- These bots share one filesystem.
+- Separate chats do not split the files.
+- Secrets stay out of shared files, chat, commits, and logs.
 
-## 改程式
+## Team files under a lead
 
-repo 上的程式交給 cloud coding agent（CloudAgent）。在分支上做，用 PR 交付。
+If a lead needs a small set of team files inside a project, you point them at the A-Team `grok-native` branch. You do not copy that project into this repo or into the human's repo.
 
-主管不自己 clone，也不自己 merge。commit、push、打包仍是三件分開的事，每一件都要使用者或主 bot 明確同意。CloudAgent 還有哪些參數，這裡沒有寫，不要自己補。
-
-## 私人記憶庫
-
-使用者開一個 private GitHub repo。主 bot 目前不能自己建 repo，有授權也不行。訪談第 7 題要使用者開好並授權。
-
-每個 bot 開工前先讀它。bot 會因為摘要或新對話丟掉上下文，所以組織資料放那裡，不放在這份公開框架裡。
-
-## 同一台電腦
-
-這些 bot 共用一個檔案系統。對話和記憶分開，檔案不會跟著分開。秘密不要寫進共享檔案。保密靠規則：不把金鑰、憑證放進對話、提交、日誌或共享路徑。
-
-## 主管底下的團隊檔
-
-一個主管如果還需要專案裡的小團隊檔案，參考 A-Team 的 `grok-native` 分支。那個分支會產出團隊：小專案用精簡流程（small office），大約 3 到 4 個階段、3 到 5 位專員，一個階段一份紀錄；大專案用完整流程。分支裡的監督文件有八行回報的一種寫法。本框架主管向上用的八行，以 [operating-rules.md](operating-rules.md) 為準。內容留在那個 repo，不抄進這份框架。
+That branch generates teams. Small work there uses a short flow, about three or four stages and three to five specialists, one record per stage. Large work uses the full flow. Its supervision note shows one eight-line report. Leads here report with the eight lines in [operating-rules.md](operating-rules.md).
 
 https://github.com/chemistrywow31/A-Team/tree/chemistrywow31/grok-native
 
-## 容易踩到的點
+## Easy to get wrong
 
-- 簡介寫太長。長文進記憶庫，簡介只留身份、回報對象、記憶庫連結。
-- 頻道名稱建完不能改。
-- SendToAgent 不會在同一輪帶回回覆。`priority: false` 不會叫醒對方。
-- 建多的 bot 要使用者自己從側邊欄刪。
-- 新 bot 不知道別人的 id，名單沒寫就會傳錯人或傳不到。
-- 共享資料夾不是私人抽屜。
-- 記憶庫沒開、或主 bot 打不開，就先不要建 bot。
-- 看回報不是在做那個專案的測試。
-- 一句「去做」不會同時授權 commit、push、打包。
+- A long profile. You keep the role, who they report to, and the memory repo link.
+- A room name you wish you could edit. You cannot.
+- Waiting in the same turn for `SendToAgent`. The reply is later. `priority: false` does not wake them.
+- An extra bot. The human deletes it from the sidebar.
+- A missing id. You will message the wrong bot, or nobody.
+- A shared folder treated as a private drawer.
+- Reading a report and calling it a test. It is not a test.
+- One "go do it" treated as commit plus push plus package.
