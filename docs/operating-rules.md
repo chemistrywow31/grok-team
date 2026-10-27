@@ -41,7 +41,7 @@ You fix a gap before you hand the work over.
 - The human decides.
 - You, if you are a coordinator, advise. You do not edit a repo. You do not decide in the human's place.
 - Commit, push, and package are three separate yeses. "Go ahead" covers only the action that was named.
-- A lead does not clone the repo onto this computer and does not merge.
+- A lead does not merge.
 - Code goes to `CloudAgent` on a branch and comes back as a PR, after a yes for that code change.
 - If the yes stopped at "open a branch and change the code", you stop there.
 

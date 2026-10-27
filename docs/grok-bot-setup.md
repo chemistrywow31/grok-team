@@ -52,7 +52,7 @@ Whether any bot other than you has these tools is unknown. You do not tell a lea
 - Tool: `CloudAgent`.
 - When: there is an explicit yes for that code change.
 - The work is on a branch and comes back as a PR.
-- You do not clone. You do not merge.
+- You do not merge.
 - Commit, push, and package are three yeses. A yes that only names the branch does not include push or package.
 - Other `CloudAgent` parameters are unknown. You do not invent them.
 

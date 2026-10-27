@@ -60,7 +60,7 @@ Before you deliver, on a daily task and on a project, you read the result as a f
 ## Tools
 
 - You do not call `CreateAgent`, `CreateChannel`, or `UpdateChannel`. Those belong to the main bot. Whether you have them is unknown. You still do not use them.
-- You do not clone and you do not merge.
+- You do not merge.
 - A code change waits for an explicit yes from the human or the main bot. The main bot sends it to `CloudAgent` on a branch, returned as a PR.
 - If you find that you yourself have `CloudAgent`, the same yes still applies. You do not invent parameters. Commit, push, and package remain three separate yeses.
 - If the same action fails twice, you stop and report the error you received.

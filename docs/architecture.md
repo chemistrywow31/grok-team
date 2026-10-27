@@ -109,7 +109,7 @@ Does the named scope. Keeps the progress page and the task board checkable. When
 
 A lead does not contact another lead. Ask the layer above.
 
-A lead does not clone a repo and does not merge. Code changes go to a cloud coding agent, on a branch, delivered as a PR. See [operating-rules.md](operating-rules.md).
+A lead does not merge. Code changes go to a cloud coding agent, on a branch, delivered as a PR. See [operating-rules.md](operating-rules.md).
 
 ## Reporting direction
 

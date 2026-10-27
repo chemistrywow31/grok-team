@@ -12,13 +12,13 @@
 
 ### 快速開始
 
-1. 把這個 repo 的網址貼給你的主 bot，連同這段話一起貼：
+1. 把下面這段貼給主 bot。你不用 clone，它也不能 clone。
 
    ```
-   先把這個 repo 讀完，照 AGENTS.md 一次問我一題。計畫寫給我看。我明確同意之前，一個 bot 都先不要建。
+   打開 https://github.com/chemistrywow31/grok-team ，用你的網頁抓取從網址讀檔，不要 clone。先讀 README.md 和 AGENTS.md，再順著連結讀用到的 docs 和 templates。raw 或 blob 都可以，例如 https://raw.githubusercontent.com/chemistrywow31/grok-team/main/AGENTS.md 。哪個打不開就說哪個，然後停，不要猜。接著照 AGENTS.md 一次問我一題，把計畫給我看。我明確同意之前，不要建立任何 bot。
    ```
 
-2. 主 bot 會讀 `AGENTS.md` 和 docs，再依 [docs/interview.md](docs/interview.md) 一次問一題。它會拿出兩種編制讓你選或混用：自己當頭，或 CEO 底下兩層主管。然後寫一份計畫。你同意之前，它不會建立任何 bot。
+2. 主 bot 從那個網址讀 `AGENTS.md` 和 docs，再依 [docs/interview.md](docs/interview.md) 一次問一題。它會拿出兩種編制讓你選或混用：自己當頭，或 CEO 底下兩層主管。然後寫一份計畫。你同意之前，它不會建立任何 bot。
 3. 問到記憶庫時，你自己開一個 private 的 GitHub repo，並讓主 bot 讀得到、寫得進。它不能自己開 repo。原因在下面「記憶掉了怎麼辦」。
 4. 你同意計畫之後，主 bot 才用 templates 寫入記憶庫、建立協調 bot 和主管 bot、填名單。bot 的 id 只放在那份私人名單。
 5. 第一天做三件事：跟主 bot 講話、看往上送的八行回報、規則要改就先講一聲。你同意之後，它才改私人記憶庫裡的規則。
@@ -128,13 +128,13 @@ Written for Grok Bot only. The rest of the files are English, which is what the 
 
 ### Quick start
 
-1. Send your main bot the URL of this repo, plus this message:
+1. Paste this to your main bot. Nothing gets cloned. The bot cannot clone, and you do not have to.
 
    ```
-   Read this repo, then interview me one question at a time following AGENTS.md. Show me the plan. Do not create any bot until I explicitly say yes.
+   Read https://github.com/chemistrywow31/grok-team by URL. Do not clone it. Open README.md and AGENTS.md first, then the docs/*.md and templates/*.md files those pages link, as raw or blob URLs, for example https://raw.githubusercontent.com/chemistrywow31/grok-team/main/AGENTS.md . Use your web fetch. If a file does not open, name the URL and stop. Do not guess. Then interview me one question at a time following AGENTS.md. Show me the plan. Do not create any bot until I explicitly say yes.
    ```
 
-2. It reads `AGENTS.md` and the docs, then interviews you from [docs/interview.md](docs/interview.md), one question at a time. It offers two shapes, a founder/owner layout and a CEO layout with two exec layers, and you can pick or mix. It writes a plan. The bot creates nothing until you agree.
+2. It reads `AGENTS.md` and the docs from that URL, then interviews you from [docs/interview.md](docs/interview.md), one question at a time. It offers two shapes, a founder/owner layout and a CEO layout with two exec layers, and you can pick or mix. It writes a plan. The bot creates nothing until you agree.
 3. During the interview, create one private GitHub repo for memory and grant the bot access. The main bot cannot create that repo. The reason is under "When memory drops out" below.
 4. After you agree, the main bot writes that memory repo from the templates, creates the coordinator and lead bots, and fills in the roster. Bot ids stay in the private roster.
 5. On the first day, do three things: talk to the main bot, read the eight-line reports that come up, and say so if a rule needs a change. The bot writes the change into your private memory repo only after you agree.
