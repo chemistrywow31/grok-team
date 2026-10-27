@@ -4,6 +4,12 @@
 
 `preferred_language`: (from the interview)
 
+`backup_repo`: (this private repo, unless the human named another private repo)
+`backup_time`: (HH:MM)
+`backup_timezone`: (the timezone they named)
+`backup_push`: (human or main bot)
+`backup_branch`: (pr, or main only when they said so)
+
 | name | role | reports_to | id | channel |
 | --- | --- | --- | --- | --- |
 | Main bot | main bot | Human | (fill after creation) | |

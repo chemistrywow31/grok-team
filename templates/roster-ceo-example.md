@@ -4,6 +4,12 @@
 
 `preferred_language`: (set in the interview)
 
+`backup_repo`: (the private repo the human named)
+`backup_time`: (HH:MM)
+`backup_timezone`: (the timezone they named)
+`backup_push`: (human or main bot)
+`backup_branch`: (pr, or main only when they said so)
+
 The human is the CEO. The main bot is the Chief of Staff. Do not create a second chief of staff. The COO and the CTO coordinate. Office leads do the work.
 
 Reporting, one layer at a time:

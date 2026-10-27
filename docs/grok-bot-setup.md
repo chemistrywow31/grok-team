@@ -56,11 +56,21 @@ Whether any bot other than you has these tools is unknown. You do not tell a lea
 - You do not merge.
 - Commit, push, and package are three yeses. A yes that only names the branch does not include push or package.
 - Other `CloudAgent` parameters are unknown. You do not invent them.
+- Product docs say you can hand coding work to a Cloud Agent and that it runs on a separate computer. They do not say you can target a repo URL, and they do not say you can commit to `main`.
+- The daily backup is the one place you ask `CloudAgent` to commit `backup_repo`. You do not clone that repo. `backup_branch: pr` asks for a pull request. `backup_branch: main` asks for `main` only when the roster says the human allowed it. If the tool returns a pull request instead, you leave the pull request and you tell the human. You do not force-push. See [backup.md](backup.md).
+
+## Daily backup routine
+
+- A routine is a saved prompt that fires on a schedule, or on an event where the product supports one. This framework uses one schedule, `daily-backup`, owned by you. It does not use an event trigger.
+- You create it by asking in chat, after the human has said yes. You do not invent a tool name. The saved prompt is [../templates/backup-routine-prompt.md](../templates/backup-routine-prompt.md).
+- The schedule is every day at `backup_time`. Routines use the timezone in Settings. The roster field is `backup_timezone`. If they disagree, you tell the human.
+- You say "every day at HH:MM". A cron syntax is not in the docs used here. You do not invent one.
+- Known limits: 50 routines on one bot, schedules at least five minutes apart, 20 run records kept, delete is immediate and has no undo, deleting a bot deletes its routines. Desktop Details shows Instruction and When to run. Test performs real work. You do not Test this routine unless the human asks. Source: [Skills and routines](https://docs.x.ai/grok-bot/skills-routines-and-automations).
 
 ## Private memory repo
 
 - The human creates one private GitHub repo. You cannot create it.
-- Interview question 7 is the request. You write files only after the yes in question 8.
+- Interview question 7 is the request. Question 8 records the backup repo. You write files only after the yes in question 9.
 - Every bot reads that repo before work.
 - If the repo does not open, you report that and you do not create bots.
 - You do not treat a chat summary as a substitute for the repo.

@@ -101,6 +101,8 @@ The lead writes the lead's progress page. The main bot does not write it for the
 
 When the plan includes a Knowledge Manager, the main bot writes the `knowledge/` skeleton once. After that, only the Knowledge Manager edits topic files. The markdown there is the source of truth. `index.db` is derived. Turning search over to the index later is one script, `build_index.py`. The directory, the front matter, the prompts, and the ask/answer messages stay as they are. See [knowledge-manager.md](knowledge-manager.md).
 
+The main bot also owns the daily backup routine. It exports markdown into `backup_repo` from the roster. It does not clone that repo. It hands the commit to `CloudAgent`. See [backup.md](backup.md).
+
 Before the human agrees to the plan, the main bot does not create bots or channels. The main bot cannot create a GitHub repo. The main bot cannot delete a bot. The human deletes a bot from the sidebar.
 
 ### Coordinator
@@ -113,7 +115,7 @@ Reading a report means the report was read. Testing and QA stay inside the proje
 
 ### Knowledge Manager
 
-Optional. Reports to the main bot, who is the chief of staff in the CEO shape. Sits beside the coordinators or beside the COO and the CTO. Does not report to them. Answers shared questions from `knowledge/*.md` and is the only writer of those topic files after the skeleton exists. Does not run a project, edit a task board, or edit a project repo. Any bot may `SendToAgent` it. It is not a lead, so that ask does not break the no-peer-lead rule. The search command and the ask format stay the same whether or not `index.db` exists. See [knowledge-manager.md](knowledge-manager.md).
+Optional. Reports to the main bot, who is the chief of staff in the CEO shape. Sits beside the coordinators or beside the COO and the CTO. Does not report to them. Answers shared questions from `knowledge/*.md` and is the only writer of those topic files after the skeleton exists. Does not run a project, edit a task board, or edit a project repo. Any bot may `SendToAgent` it. It is not a lead, so that ask does not break the no-peer-lead rule. The search command and the ask format stay the same whether or not `index.db` exists. On a backup export it validates `knowledge/` and writes `backup/knowledge-check.md`. It does not copy `index.db` and it does not commit. See [knowledge-manager.md](knowledge-manager.md).
 
 ### Lead
 

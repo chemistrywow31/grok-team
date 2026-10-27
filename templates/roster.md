@@ -4,6 +4,14 @@
 
 `preferred_language`: (set in the interview, for example `en` or `zh-TW`)
 
+`backup_repo`: (the private repo the human named in the interview)
+`backup_time`: (HH:MM)
+`backup_timezone`: (the timezone they named)
+`backup_push`: (human or main bot)
+`backup_branch`: (pr, or main only when they said so)
+
+You do not invent a repo URL. The daily backup spec is [../docs/backup.md](../docs/backup.md).
+
 A bot does not know the others' ids until it is told. After you create a bot, write the id here and tell that bot who it reports to.
 
 | name | role | reports_to | id | channel |

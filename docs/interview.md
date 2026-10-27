@@ -44,6 +44,7 @@ Shape only, to translate, not to paste over their language: "Two shapes. Owner: 
 - Starting point you state: the human decides. A coordinator advises and does not edit a repo.
 - You ask separately about commit, push, and package. One "go do it" does not authorize all three.
 - If they want you to say yes for some of those, you write which ones.
+- The daily backup push is question 8. You do not fold it into this answer.
 - Exit when: each of the three has an owner for the yes.
 
 ## 4. Sensitivity and data
@@ -85,7 +86,22 @@ Shape only, to translate, not to paste over their language: "Two shapes. Owner: 
 - You do not create bots here. You do not write files yet. The skeleton is [../templates/memory-repo/AGENTS.md](../templates/memory-repo/AGENTS.md).
 - Exit when: you have opened the repo and can tell them you have read access and write access.
 
-## 8. Confirm the plan
+## 8. Which private repo is the memory and backup repo, and who may push
+
+- Goal: `backup_repo`, `backup_push`, `backup_time`, `backup_timezone`, and `backup_branch`.
+- You ask which private repo is their memory and backup repo, and who may push.
+- The usual answer is the repo from question 7. They may name a different private repo. You refuse a public repo. You do not write a sample URL. You do not hard-code one.
+- You record `backup_push` as `human` or `main bot`. `main bot` means this daily backup only.
+- You ask the local time and the timezone. You record `backup_time` as `HH:MM` and `backup_timezone` as the name they use. Routines use the timezone in Settings. If they have not set it, you say so.
+- You ask whether this daily backup may commit to `main`. A yes records `backup_branch: main`. Anything else records `backup_branch: pr`. A hedge is not a yes for `main`.
+- You say the push path in one or two sentences: you do not clone; you hand the commit to `CloudAgent`; a pull request is the result you know how to ask for; a direct commit to `main` happens only when they just allowed it and only when the tool can do it.
+- You say a day with no markdown change stays quiet, and a secret hit commits nothing.
+- The spec is [backup.md](backup.md).
+- Exit when: `backup_repo` is a private repo they named, `backup_push` is `human` or `main bot`, the time and timezone are set, and `backup_branch` is `main` or `pr`.
+
+Shape only, to translate, not to paste over their language: "Which private repo should hold the daily backup, and who may push to it? The memory repo you just opened is the usual answer. What local time should it run?"
+
+## 9. Confirm the plan
 
 - Goal: show the plan and wait.
 - You show one page, in the format from [../AGENTS.md](../AGENTS.md).
@@ -108,6 +124,7 @@ After the build, the human talks to you, reads eight-line reports, and asks for 
 - [ ] Preferred language, form of address, and tone
 - [ ] Rooms: name, members, purpose
 - [ ] Private memory repo link that you can read and write
+- [ ] `backup_repo`, who may push, `backup_time`, `backup_timezone`, and `main` or `pr`
 
 ## The yes
 
@@ -120,3 +137,5 @@ After the build, the human talks to you, reads eight-line reports, and asks for 
 - [ ] Bots created, ids only on the private roster
 - [ ] Channels created, names and members matching the plan
 - [ ] If the plan includes a Knowledge Manager: `knowledge/` skeleton written, long brief in the memory repo, bot created, id only on the private roster
+- [ ] Roster has `backup_repo`, `backup_time`, `backup_timezone`, `backup_push`, and `backup_branch`
+- [ ] `backup/` skeleton is in the memory repo, and the `daily-backup` routine is saved on the main bot

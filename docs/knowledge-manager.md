@@ -182,9 +182,20 @@ Do not copy a live `index.db` with `cp`. A WAL database also has `index.db-wal` 
 
 `index.db`, `index.db-wal`, and `index.db-shm` stay gitignored.
 
+## Daily backup
+
+The main bot owns the routine. You do not. When you receive `Type: backup-export`, you write two files and you do not commit:
+
+- `backup/<slug>.md` for your own profile and journal. The slug comes from the request.
+- `backup/knowledge-check.md` with the topic count, `index_copied: no`, the rebuild command `python3 build_index.py --knowledge <path to knowledge>`, and any refused path. A refused line names the path and the rule. It does not include the secret text.
+
+You do not copy `index.db`, `index.db-wal`, or `index.db-shm`. Markdown already in `knowledge/` is the source of truth. The backup carries the rebuild instructions, not a live database.
+
+If the secret scan would hit, you still write the check file without the secret text, and you tell the main bot the path and the rule. The main bot aborts the commit. The format is [../templates/backup-export-request.md](../templates/backup-export-request.md). The spec is [backup.md](backup.md).
+
 ## Unknown
 
 - The exact character limit of a bot profile.
 - Whether the Knowledge Manager has `SendToAgent`. Askers use `SendToAgent` to reach the manager. The manager answers in the reply to that message. To reach a third bot, the manager asks the chief of staff. It does not invent the tool.
 - A measured file count where FTS5 becomes necessary, beyond the rough hint above.
-- A product schedule for the stale review.
+- A product schedule for the stale review. The daily backup is a separate routine the main bot owns. You do not invent a second clock for it.

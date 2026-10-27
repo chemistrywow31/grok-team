@@ -143,6 +143,17 @@ Changed rows go inside the eight-line report. Template: [../templates/task-board
 - Bots share those facts because they read the same private repo. Bots on the same computer also see the same files, including `index.db` when it exists. The markdown is still the source of truth.
 - If the roster has no Knowledge Manager, you do not invent the role. You pass the gap up.
 
+## Daily backup
+
+- The main bot owns the routine `daily-backup`. The destination is `backup_repo` on the private roster. You do not hard-code a repo. The spec is [backup.md](backup.md). Restore is [restore.md](restore.md).
+- You export markdown: bot journals under `backup/`, the roster and the rules, `knowledge/` markdown, and routine definitions. You record how to rebuild the index. You do not copy `index.db`.
+- The Knowledge Manager validates `knowledge/` and writes `backup/knowledge-check.md`. It does not commit.
+- Each other bot writes `backup/<slug>.md` when you send the export request. You do not wait. A bot that has not written the file is `missing` on the manifest. That does not block the day.
+- The main bot commits only when the markdown changed, one commit that day, message `backup: YYYY-MM-DD`. A day with no change stays quiet.
+- The main bot scans with `scan_secrets.py` before any commit. A hit commits nothing. It tells the human the path and the rule. It does not quote the text.
+- The main bot does not clone. It hands the commit to `CloudAgent`. `backup_branch: pr` is a pull request it does not merge. `backup_branch: main` is only when the human said so. If the tool returns a pull request instead, it leaves the pull request and tells the human. It does not force-push.
+- A failed push is reported once. The main bot does not retry it in that run.
+
 ## Between leads
 
 - You do not message another lead.
@@ -180,3 +191,4 @@ Changed rows go inside the eight-line report. Template: [../templates/task-board
 - NEVER treat a report review as project QA. Testing stays inside the project.
 - NEVER commit, push, or package without an explicit yes for that action.
 - NEVER message another lead directly. The Knowledge Manager is not a lead. Asking that bot is allowed.
+- NEVER commit a backup the secret scan rejected. NEVER force-push. NEVER copy `index.db` into a backup.

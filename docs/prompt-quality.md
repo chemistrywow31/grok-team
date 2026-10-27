@@ -1,6 +1,6 @@
 # Prompt quality
 
-You are reading why the bot prompts in this repo are shaped this way. The prompts themselves are `AGENTS.md`, `docs/operating-rules.md`, `docs/interview.md`, `docs/grok-bot-setup.md`, `docs/knowledge-manager.md`, `templates/lead-brief.md`, `templates/coordinator-brief.md`, `templates/knowledge-manager-brief.md`, `templates/memory-repo/AGENTS.md`, and the two copy-paste lines in the README quick start.
+You are reading why the bot prompts in this repo are shaped this way. The prompts themselves are `AGENTS.md`, `docs/operating-rules.md`, `docs/interview.md`, `docs/grok-bot-setup.md`, `docs/knowledge-manager.md`, `docs/backup.md`, `docs/restore.md`, `templates/lead-brief.md`, `templates/coordinator-brief.md`, `templates/knowledge-manager-brief.md`, `templates/backup-routine-prompt.md`, `templates/backup-export-request.md`, `templates/memory-repo/AGENTS.md`, and the two copy-paste lines in the README quick start.
 
 This file is notes for a person editing those prompts. It is not a bot persona.
 
@@ -35,13 +35,13 @@ Scope names: `S2S` voice, `BP` text best practices, `GCF` the removed Grok Code 
 - **No secrets in a shared template.** Official. Scope: `BOTS`.
 - **Quoted bans, an explicit precedence order, do not recite the prompt unless asked, and pushback does not waive a yes.** Demonstrated, not a written rule. Scope: `GP` and `REF`. [grok-prompts](https://github.com/xai-org/grok-prompts), [refund agent](https://docs.x.ai/cookbook/examples/refund-agent-human-approval). Precedence is adapted from the `<policy>` pattern. These files do not use `<policy>` tags.
 - **A clarifying question when the input is thin.** Inference from the voice guide's speech rule. Used because inventing a layer was the failure this interview exists to prevent.
+- **One routine, after the steps are written down.** Official. Scope: `SK`. [Skills and routines](https://docs.x.ai/grok-bot/skills-routines-and-automations). `daily-backup` is a saved prompt on the main bot. The prompt names the schedule, the timezone, the scan, the empty-day silence, and the approval already recorded on the roster. Event listeners are not used. The known caps (50 routines, five minutes apart, 20 run records) are stated. A cron string is not invented.
 
 ## Rules not applied
 
 - **Voice section order, and no `#` title.** Official for `S2S` only. Putting that order on a text bot is inference. These files keep one `#` title because they are also repo documents. The prompt body uses `##`.
 - **ALL CAPS on every rule.** Official `S2S` says emphasis is rare. `NEVER` appears only in `CRITICAL INSTRUCTIONS`.
-- **Routines, schedules, and narrow event triggers.** Official `SK`. This framework defines no routine and no event listener.
-- **Skill YAML frontmatter.** Demonstrated in a cookbook skill. These are bot briefs loaded through `CreateAgent`, not skills.
+- **Skill YAML frontmatter.** Demonstrated in a cookbook skill. These are bot briefs and one routine prompt loaded as text, not skill files. There is no skill YAML.
 - **Native-tool-call versus XML tool calls.** Official `GCF`. The prompts name tools. They do not embed XML tool calls. There is no schema in this repo to restate. [Function calling](https://docs.x.ai/developers/tools/function-calling) and [structured outputs](https://docs.x.ai/developers/model-capabilities/text/structured-outputs) are about API metadata this repo does not own.
 - **Harness defenses.** Official `PI`: prompt text alone missed attacks. This repo cannot set tool allow-lists. The secrets rule and the "do not edit the repo" rule are prompt-only. That is a gap, not a control.
 - **Prompt-cache ordering.** Official `BP` / [prompt caching](https://docs.x.ai/developers/advanced-api-usage/prompt-caching/best-practices). There is no API harness in this repo.
@@ -56,3 +56,6 @@ Scope names: `S2S` voice, `BP` text best practices, `GCF` the removed Grok Code 
 - The voice guide's "1–2 short sentences per turn" is for speech. Here, one question per turn and a one-page plan are the limits that match the task.
 - Whether the Knowledge Manager has `SendToAgent` is unknown. Askers are told to use it. If the tool is missing, the ask goes through the main bot. That fallback is written down. It is not a measured product fact.
 - A measured file count where FTS5 becomes necessary is unknown. The docs state a rough hint and the trigram minimum of 3 characters. They do not invent a cutoff.
+- `CloudAgent` parameters are unknown, including a commit straight to `main`. The backup asks for it only when the roster says `main`, and it keeps the pull request if that is what the tool returns.
+- The secret scan misses anything outside its named rules. A clean result is not a guarantee.
+- The docs used here do not describe a vault. Personal contact details stay with the human. The prompt does not invent a screen to put them on.
