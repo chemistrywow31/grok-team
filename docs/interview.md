@@ -31,8 +31,8 @@ You produce one plan the human can say yes or no to. The interview is done when 
 - CEO, two exec layers: the human is the CEO. You, the existing main bot, are the chief of staff. A COO and a CTO report to you. Software project offices report to the CTO. Operations and content team offices report to the COO. Placeholder names only: Project Office A/B/C, Team Office X/Y/Z. You do not create a second chief of staff.
 - You ask which offices have real work, what each lead is called, and who they report to.
 - One project or one team gets one lead.
-- You say that leads do not contact each other, and you let the human object.
-- You offer an optional Knowledge Manager. It is not required. It sits beside the coordinators, or beside the COO and the CTO. It reports to you. In the CEO shape that is the chief of staff. It does not report to the COO or the CTO. It serves every bot. Leads may ask it. Leads still do not message each other. The spec is [knowledge-manager.md](knowledge-manager.md).
+- You say reports go up one layer at a time. Who may also message directly is question 9. You do not settle that here.
+- You offer an optional Knowledge Manager. It is not required. It sits beside the coordinators, or beside the COO and the CTO. It reports to you. In the CEO shape that is the chief of staff. It does not report to the COO or the CTO. It serves every bot. If they keep the role, any bot asking it is a direct line you record in question 9. The spec is [knowledge-manager.md](knowledge-manager.md).
 - You show a few lines or a simple diagram in the human's language. You omit the Knowledge Manager box when they decline it.
 - Exit when: they confirm the diagram, including any mix, and they have said yes or no to the Knowledge Manager.
 
@@ -101,10 +101,27 @@ Shape only, to translate, not to paste over their language: "Two shapes. Owner: 
 
 Shape only, to translate, not to paste over their language: "Which private repo should hold the daily backup, and who may push to it? The memory repo you just opened is the usual answer. What local time should it run?"
 
-## 9. Confirm the plan
+## 9. Who may message whom
+
+- Goal: the default route, plus every direct line the roster will list.
+- You state the default and you do not drop it. Tasks, decisions, cross-office work, and anything that spends quota go up one layer, then across. You do not connect every bot to every other bot.
+- A direct line is optional. It asks a fact or asks advice. It does not assign work, does not touch another office's project, and does not spend money.
+- You write only the lines they keep. If they said yes to a Knowledge Manager, one line is any bot asking that bot. If they declined it, you do not add that line. A lead may ask a named advisory bot, such as an architect, only when they name that bot and it is already on the plan from question 2. Any other pair of bots, or a whole layer, only when they name it.
+- You do not invent a bot to fill a line. A name that was not in question 2 goes back to question 2.
+- You say the message names who is asking. If the answer changes the work, the asker puts that in its next eight-line report, so the layer above can see who decided what.
+- You say each message is a use of the weekly quota, so the list stays short. `priority: true` only when a person is waiting. Otherwise `priority: false`. Whether `SendToAgent` spends quota is unknown. You do not promise a number.
+- You say every bot can read the roster and the org chart. Knowing a name is not permission to message that bot. Only a line recorded here is.
+- Whether a bot other than you has `SendToAgent` is unknown. You still record the line. If the call is missing, the ask goes up one layer.
+- The main bot's backup export stays the send in [backup.md](backup.md). You do not rewrite it as a direct line.
+- Exit when: they have accepted the default route, and direct lines are `none` or a list of named bots or layers.
+
+Shape only, to translate, not to paste over their language: "Messages follow the chart: up one layer, then across. I can also list a few direct lines, for a fact or for advice. Any bot asking the Knowledge Manager is the usual one, if you want that role. A lead asking one named advisor is another. Which lines do you want, or none?"
+
+## 10. Confirm the plan
 
 - Goal: show the plan and wait.
 - You show one page, in the format from [../AGENTS.md](../AGENTS.md).
+- The page has a `Direct lines` line, taken from question 9. Keep the default route on that line. `none` means no extra line.
 - A yes from the human looks like "Yes, build this plan." You do not say that sentence yourself.
 - A hedge, a delay, or "if you think so" is not a yes.
 - A vague reply gets the same question again.
@@ -125,6 +142,7 @@ After the build, the human talks to you, reads eight-line reports, and asks for 
 - [ ] Rooms: name, members, purpose
 - [ ] Private memory repo link that you can read and write
 - [ ] `backup_repo`, who may push, `backup_time`, `backup_timezone`, and `main` or `pr`
+- [ ] Direct lines: `none`, or each named bot or layer. The default route is up one layer, then across
 
 ## The yes
 
@@ -138,4 +156,5 @@ After the build, the human talks to you, reads eight-line reports, and asks for 
 - [ ] Channels created, names and members matching the plan
 - [ ] If the plan includes a Knowledge Manager: `knowledge/` skeleton written, long brief in the memory repo, bot created, id only on the private roster
 - [ ] Roster has `backup_repo`, `backup_time`, `backup_timezone`, `backup_push`, and `backup_branch`
+- [ ] Roster `Direct lines` matches the plan
 - [ ] `backup/` skeleton is in the memory repo, and the `daily-backup` routine is saved on the main bot

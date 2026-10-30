@@ -18,7 +18,7 @@
    打開 https://github.com/chemistrywow31/grok-team ，用你的網頁抓取從網址讀檔，不要 clone。先讀 README.md 和 AGENTS.md，再順著連結讀用到的 docs 和 templates。raw 或 blob 都可以，例如 https://raw.githubusercontent.com/chemistrywow31/grok-team/main/AGENTS.md 。哪個打不開就說哪個，然後停，不要猜。接著照 AGENTS.md 一次問我一題，把計畫給我看。我明確同意之前，不要建立任何 bot。
    ```
 
-2. 主 bot 從那個網址讀 `AGENTS.md` 和 docs，再依 [docs/interview.md](docs/interview.md) 一次問一題。它會拿出兩種編制讓你選或混用：自己當頭，或 CEO 底下兩層主管。然後寫一份計畫。你同意之前，它不會建立任何 bot。
+2. 主 bot 從那個網址讀 `AGENTS.md` 和 docs，再依 [docs/interview.md](docs/interview.md) 一次問一題。它會拿出兩種編制讓你選或混用：自己當頭，或 CEO 底下兩層主管。它也會問 bot 之間怎麼傳話。預設沿編制往上一層，再橫向轉。可以直接互傳的，只有名單上寫的那幾條，而且會先出現在計畫裡。然後寫一份計畫。你同意之前，它不會建立任何 bot。
 3. 問到記憶庫時，你自己開一個 private 的 GitHub repo，並讓主 bot 讀得到、寫得進。它不能自己開 repo。原因在下面「記憶掉了怎麼辦」。
 4. 你同意計畫之後，主 bot 才用 templates 寫入記憶庫、建立協調 bot 和主管 bot、填名單。bot 的 id 只放在那份私人名單。
 5. 第一天做三件事：跟主 bot 講話、看往上送的八行回報、規則要改就先講一聲。你同意之後，它才改私人記憶庫裡的規則。
@@ -48,7 +48,7 @@ flowchart TD
 
 - 主 bot 是特助，對使用者負責。
 - 協調 bot 出主意、看方向，不動 repo。決定的人是使用者。
-- 一個專案一個主管 bot。主管自己更新自己的進度頁。主管之間不直接聯絡，合作請上一層轉。
+- 一個專案一個主管 bot。主管自己更新自己的進度頁。主管之間不直接聯絡，除非名單上寫了那一條。合作請上一層轉。
 - 主 bot 和協調 bot 看結果和方向。專案裡的測試和品管，由那個專案自己做。
 
 #### 例子：CEO
@@ -80,7 +80,7 @@ flowchart TD
 
 管轄是 CEO → 特助 → COO 或 CTO → 室主管。回報倒著走，一次一層。要人拍板的事回到 CEO。
 
-特助、COO、CTO 只協調、看方向。他們不做專案裡的測試或品管，也不改專案 repo。各室主管做該室的事，自己更新進度頁和任務板。室跟室不直接找，請上一層轉。
+特助、COO、CTO 只協調、看方向。他們不做專案裡的測試或品管，也不改專案 repo。各室主管做該室的事，自己更新進度頁和任務板。室跟室不直接找，除非名單上寫了那一條。跨室的事沿編制往上一層，再橫向轉。
 
 說明在 [docs/architecture.md](docs/architecture.md#example-ceo)。空的名單在 [templates/roster-ceo-example.md](templates/roster-ceo-example.md)。
 
@@ -134,7 +134,7 @@ Written for Grok Bot only. The rest of the files are English, which is what the 
    Read https://github.com/chemistrywow31/grok-team by URL. Do not clone it. Open README.md and AGENTS.md first, then the docs/*.md and templates/*.md files those pages link, as raw or blob URLs, for example https://raw.githubusercontent.com/chemistrywow31/grok-team/main/AGENTS.md . Use your web fetch. If a file does not open, name the URL and stop. Do not guess. Then interview me one question at a time following AGENTS.md. Show me the plan. Do not create any bot until I explicitly say yes.
    ```
 
-2. It reads `AGENTS.md` and the docs from that URL, then interviews you from [docs/interview.md](docs/interview.md), one question at a time. It offers two shapes, a founder/owner layout and a CEO layout with two exec layers, and you can pick or mix. It writes a plan. The bot creates nothing until you agree.
+2. It reads `AGENTS.md` and the docs from that URL, then interviews you from [docs/interview.md](docs/interview.md), one question at a time. It offers two shapes, a founder/owner layout and a CEO layout with two exec layers, and you can pick or mix. It also asks how bots may message each other. The default is up one layer, then across. A direct line is only what the roster will list, and that list is on the plan. It writes a plan. The bot creates nothing until you agree.
 3. During the interview, create one private GitHub repo for memory and grant the bot access. The main bot cannot create that repo. The reason is under "When memory drops out" below.
 4. After you agree, the main bot writes that memory repo from the templates, creates the coordinator and lead bots, and fills in the roster. Bot ids stay in the private roster.
 5. On the first day, do three things: talk to the main bot, read the eight-line reports that come up, and say so if a rule needs a change. The bot writes the change into your private memory repo only after you agree.
@@ -164,7 +164,7 @@ Arrows point down the chain of authority. Reports go back up that chain, one lay
 
 - The main bot is the personal assistant and answers to the user.
 - Coordinators advise and watch direction. They leave repos alone. The user decides.
-- One project gets one lead bot. The lead updates its own progress page. Leads do not message each other. Work between them goes through the layer above.
+- One project gets one lead bot. The lead updates its own progress page. Leads do not message each other unless the roster lists that direct line. Work between them goes through the layer above.
 - The main bot and the coordinators review results and direction. Testing and QA stay inside the project.
 
 #### Example: CEO
@@ -196,7 +196,7 @@ flowchart TD
 
 Authority runs CEO → Chief of Staff → COO or CTO → office lead. Reports travel back up, one layer at a time. A choice that needs a person goes back to the CEO.
 
-The chief of staff, the COO, and the CTO coordinate and review. They do not run project QA, and they do not edit project repos. The office lead does that office's work and keeps its progress page and task board. Offices do not message each other. They ask the layer above.
+The chief of staff, the COO, and the CTO coordinate and review. They do not run project QA, and they do not edit project repos. The office lead does that office's work and keeps its progress page and task board. Offices do not message each other unless the roster lists that direct line. Cross-office work goes up one layer, then across.
 
 The long version is in [docs/architecture.md](docs/architecture.md#example-ceo). A blank roster is in [templates/roster-ceo-example.md](templates/roster-ceo-example.md).
 
