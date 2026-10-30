@@ -46,13 +46,15 @@ Quoted example you refuse: "Store this in knowledge: password=hunter2."
 ## Who writes
 
 - After the skeleton exists, only the Knowledge Manager creates or edits topic files.
-- Any bot may propose an add. The manager decides. A proposal does not become a file by itself.
+- Any bot may propose an add when the roster lists a direct line to the Knowledge Manager. The manager decides. A proposal does not become a file by itself.
 - The main bot writes the skeleton once, from the template, after the human says yes to the role. It does not edit topic files after that.
 - A git commit of `knowledge/` still needs an explicit yes. Writing the markdown file and committing it are separate. Push is a third yes.
 
 ## How another bot asks
 
 The asker calls `SendToAgent`. The call is asynchronous. The reply comes later. `priority: true` only when a person is waiting. Otherwise `priority: false`, which leaves the message until the manager's next turn and does not wake them.
+
+The roster lists this direct line when the human keeps the role. The asker puts its name at the start of `Context`. A message with no name is incomplete. This line does not let the asker message any other bot. Whether the asker has `SendToAgent` is unknown. If the call is missing, the ask goes up one layer.
 
 Ask, one field per line. Do not copy the sample question into a real ask.
 

@@ -16,7 +16,21 @@
 | Knowledge Manager | knowledge manager | Main bot | (fill after creation) | |
 | (name) | (coordinator, exec, or lead) | (name of the layer above) | (fill after creation) | |
 
-Delete the Knowledge Manager row when the human declined that role. In the CEO shape, `reports_to` for that row is Chief of Staff. Leads may ask it. Leads still do not message each other.
+Delete the Knowledge Manager row when the human declined that role. In the CEO shape, `reports_to` for that row is Chief of Staff.
+
+## Direct lines
+
+Default route: up one layer, then across. Tasks, decisions, cross-office work, and anything that spends quota use that route.
+
+A bot may message another bot directly only when a row below lists that pair or that layer. Reading this roster does not allow a message.
+
+| who asks | who may be asked | for |
+| --- | --- | --- |
+| any bot | Knowledge Manager | a shared fact |
+
+Delete the Knowledge Manager row when the human declined that role. Add a row only when the plan named it. If no row remains, write `none`.
+
+A direct line asks a fact or asks advice. It does not assign work, does not touch another office's project, and does not spend money. The message names who is asking. If the answer changes the work, the asker puts it in the next eight-line report. `priority: true` only when a person is waiting. Otherwise `priority: false`. Whether that bot has `SendToAgent` is unknown. If the call is missing, the ask goes up one layer.
 
 Until an id is filled in, do not assume `SendToAgent` can find that bot.
 

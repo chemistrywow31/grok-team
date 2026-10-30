@@ -137,7 +137,7 @@ Changed rows go inside the eight-line report. Template: [../templates/task-board
 - `knowledge/config.yml` is part of the layout from the first day. `index` is `auto`, `on`, or `off`. A missing file means `auto`.
 - `index.db` is a derived SQLite FTS5 file. It is gitignored. You can delete it. You rebuild it by running `build_index.py`. That is the whole change when you turn the index on. The directory, the front matter, the prompts, and the message format stay as they are.
 - You search with `search.py`. Stdout is `mode`, then `path` and `snippet`, or the word `none`. That shape is the same when `index.db` is absent and when it is present.
-- If the roster has a Knowledge Manager, you ask that bot with `SendToAgent`. The message format is in [knowledge-manager.md](knowledge-manager.md). `priority: true` only when a person is waiting. Otherwise `priority: false`.
+- If the roster lists a direct line to the Knowledge Manager, you ask that bot with `SendToAgent`. The message format is in [knowledge-manager.md](knowledge-manager.md). Put your name at the start of `Context`. `priority: true` only when a person is waiting. Otherwise `priority: false`.
 - You do not write a topic file. You do not store a secret, a key, or a credential there.
 - A fact about your own task stays on your task board. A fact another bot may reuse goes through the Knowledge Manager.
 - Bots share those facts because they read the same private repo. Bots on the same computer also see the same files, including `index.db` when it exists. The markdown is still the source of truth.
@@ -154,11 +154,17 @@ Changed rows go inside the eight-line report. Template: [../templates/task-board
 - The main bot does not clone. It hands the commit to `CloudAgent`. `backup_branch: pr` is a pull request it does not merge. `backup_branch: main` is only when the human said so. If the tool returns a pull request instead, it leaves the pull request and tells the human. It does not force-push.
 - A failed push is reported once. The main bot does not retry it in that run.
 
-## Between leads
+## Who may message whom
 
-- You do not message another lead.
-- You may `SendToAgent` the Knowledge Manager. That bot is not a lead.
-- Collaboration with another lead goes through the layer above.
+- The default route is the org chart. Tasks, decisions, cross-office work, and anything that spends quota go up one layer, then across. You do not message off that route unless the roster lists the direct line.
+- You read the roster and the org chart, so you know who is who. Knowing a name is not permission to message that bot.
+- You do not message another lead unless the roster lists that direct line. The same rule covers a coordinator messaging a lead on another line.
+- A listed line asks a fact or asks advice. It does not assign work, does not touch another office's project, and does not spend money.
+- The message names who is asking. If the answer changes the work, the asker puts that in the next eight-line report, on `Done` or `Needs context`.
+- You may `SendToAgent` the Knowledge Manager when the roster lists that line. That bot is not a lead. The message format is in [knowledge-manager.md](knowledge-manager.md). `priority: true` only when a person is waiting. Otherwise `priority: false`.
+- Whether you have `SendToAgent` is unknown when you are not the main bot. If the call is missing, you ask the layer above.
+- A room reply spends the human's weekly quota. Whether `SendToAgent` spends weekly quota is unknown. You still keep direct lines few.
+- The main bot's backup export is the send in [backup.md](backup.md). It is not a peer direct line.
 - You still report up. That path stays open.
 
 ## Meeting rooms
@@ -190,5 +196,5 @@ Changed rows go inside the eight-line report. Template: [../templates/task-board
 - NEVER invent a status token, a secret, or a missing fact.
 - NEVER treat a report review as project QA. Testing stays inside the project.
 - NEVER commit, push, or package without an explicit yes for that action.
-- NEVER message another lead directly. The Knowledge Manager is not a lead. Asking that bot is allowed.
+- NEVER message another lead directly unless the roster lists that direct line.
 - NEVER commit a backup the secret scan rejected. NEVER force-push. NEVER copy `index.db` into a backup.

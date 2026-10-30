@@ -36,7 +36,7 @@ flowchart TD
   ops --> b
 ```
 
-Arrows point down, along authority. Reports go up the same lines, one layer at a time. Omit the Knowledge Manager box when the human does not want that role. Any bot may ask it. That ask is not a report line.
+Arrows point down, along authority. Reports go up the same lines, one layer at a time. Omit the Knowledge Manager box when the human does not want that role. Any bot may ask it when the roster lists that direct line. That ask is not a report line.
 
 Use this when the human is running their own projects and wants a coordinator only where the work splits into dev and ops.
 
@@ -77,7 +77,7 @@ Who coordinates, and who does the work:
 
 - The chief of staff, the COO, and the CTO coordinate and review direction. They do not run project QA or other project testing. They do not edit project repos.
 - The office lead does that office's work, updates its progress page and task board, and sends the eight-line report up one layer.
-- Offices do not message each other. Cross-office work goes up, then across. A shared fact is the exception: any bot may ask the Knowledge Manager. That bot is not an office lead.
+- Offices do not message each other unless the roster lists that direct line. Cross-office work goes up, then across. A shared fact is a usual direct line: any bot may ask the Knowledge Manager when the roster lists it. That bot is not an office lead.
 
 A standing room, if you open one, is the chief of staff plus the COO and the CTO. The CEO joins only if they want to. Office leads stay out until someone names them. The cap is 6 members, including the main bot. See [operating-rules.md](operating-rules.md).
 
@@ -109,19 +109,19 @@ Before the human agrees to the plan, the main bot does not create bots or channe
 
 A coordinator is the dev coordinator, the ops coordinator, the COO, or the CTO. They read the next layer's results and direction, give advice, and send that up. Advice stays advice. The human decides whether a repo changes. The coordinator does not edit it.
 
-A coordinator does not direct a lead on another line. Cross-line work goes back to the main bot.
+A coordinator does not direct a lead on another line. Cross-line work goes back to the main bot. A direct line on the roster may ask that lead for advice. It does not assign the work.
 
 Reading a report means the report was read. Testing and QA stay inside the project.
 
 ### Knowledge Manager
 
-Optional. Reports to the main bot, who is the chief of staff in the CEO shape. Sits beside the coordinators or beside the COO and the CTO. Does not report to them. Answers shared questions from `knowledge/*.md` and is the only writer of those topic files after the skeleton exists. Does not run a project, edit a task board, or edit a project repo. Any bot may `SendToAgent` it. It is not a lead, so that ask does not break the no-peer-lead rule. The search command and the ask format stay the same whether or not `index.db` exists. On a backup export it validates `knowledge/` and writes `backup/knowledge-check.md`. It does not copy `index.db` and it does not commit. See [knowledge-manager.md](knowledge-manager.md).
+Optional. Reports to the main bot, who is the chief of staff in the CEO shape. Sits beside the coordinators or beside the COO and the CTO. Does not report to them. Answers shared questions from `knowledge/*.md` and is the only writer of those topic files after the skeleton exists. Does not run a project, edit a task board, or edit a project repo. Any bot may `SendToAgent` it when the roster lists that direct line. It is not a lead. The search command and the ask format stay the same whether or not `index.db` exists. On a backup export it validates `knowledge/` and writes `backup/knowledge-check.md`. It does not copy `index.db` and it does not commit. See [knowledge-manager.md](knowledge-manager.md).
 
 ### Lead
 
 Does the named scope. Keeps the progress page and the task board checkable. When a status changes, sends one eight-line report up one layer.
 
-A lead does not contact another lead. Ask the layer above. A lead may `SendToAgent` the Knowledge Manager when that bot is on the roster. The Knowledge Manager is not a lead.
+A lead does not contact another lead unless the roster lists that direct line. Otherwise ask the layer above. A lead may `SendToAgent` the Knowledge Manager when the roster lists that line. The Knowledge Manager is not a lead. Whether a lead has `SendToAgent` is unknown. If the call is missing, the lead asks the layer above.
 
 A lead does not merge. Code changes go to a cloud coding agent, on a branch, delivered as a PR. See [operating-rules.md](operating-rules.md).
 
@@ -136,6 +136,8 @@ One layer at a time.
 - Knowledge Manager → main bot → human. In the CEO shape the main bot is the chief of staff.
 
 Do not broadcast across layers. The layer above reads in-progress rows on the task board named in `Board`. An ask to the Knowledge Manager is not a broadcast. The answer comes back to the asker.
+
+Direct lines live on the private roster. They ask a fact or ask advice. They do not replace the report path. The message names who is asking. If the answer changes the work, the asker puts it in the next eight-line report. Reading the roster is not permission to message. The direct-lines section is.
 
 ## Adding or removing a layer
 

@@ -17,7 +17,7 @@ Reporting, one layer at a time:
 - Project office lead → CTO → Chief of Staff → CEO
 - Team office lead → COO → Chief of Staff → CEO
 
-Project offices are software projects. Team offices are operations or content teams. Delete any row that has no work. Leads do not message each other. They may ask the Knowledge Manager. Delete that row when the human declined the role. It reports to the Chief of Staff, beside the COO and the CTO, not under them.
+Project offices are software projects. Team offices are operations or content teams. Delete any row that has no work. Leads do not message each other unless the direct-lines section lists that line. Delete the Knowledge Manager row when the human declined the role. It reports to the Chief of Staff, beside the COO and the CTO, not under them.
 
 | name | role | reports_to | id | channel |
 | --- | --- | --- | --- | --- |
@@ -33,5 +33,19 @@ Project offices are software projects. Team offices are operations or content te
 | Team Office Z lead | lead | COO | (fill after creation) | |
 
 An exec room, if you open one, is the Chief of Staff, the COO, and the CTO. The CEO joins only if they want to. Office leads stay out until someone names them. A room holds at most 6 members, including the main bot.
+
+## Direct lines
+
+Default route: up one layer, then across. Tasks, decisions, cross-office work, and anything that spends quota use that route.
+
+A bot may message another bot directly only when a row below lists that pair or that layer. Every bot can read this roster. Reading it does not allow a message.
+
+| who asks | who may be asked | for |
+| --- | --- | --- |
+| any bot | Knowledge Manager | a shared fact |
+
+Delete the Knowledge Manager row when the human declined that role. Add a row only when the human named it. If no row remains, write `none`.
+
+A direct line asks a fact or asks advice. It does not assign work, does not touch another office's project, and does not spend money. The message names who is asking. If the answer changes the work, the asker puts it in the next eight-line report. `priority: true` only when a person is waiting. Otherwise `priority: false`. Whether that bot has `SendToAgent` is unknown. If the call is missing, the ask goes up one layer.
 
 See [../docs/architecture.md](../docs/architecture.md#example-ceo) and [../docs/interview.md](../docs/interview.md).
