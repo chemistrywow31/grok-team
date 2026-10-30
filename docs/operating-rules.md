@@ -159,6 +159,9 @@ Changed rows go inside the eight-line report. Template: [../templates/task-board
 - You do not message another lead.
 - You may `SendToAgent` the Knowledge Manager. That bot is not a lead.
 - Collaboration with another lead goes through the layer above.
+- Exceptions exist only when the human chose them in interview question 5c and the `Roster meta` section on the private roster marks them. Any bot may ask a bot marked `kind: special`. Bots marked `layer: c-level` may ask each other. A C-level exec is not a lead. Leads marked `peer: lead` may ask each other, whoever they report to. Other leads still do not message each other. Each of these is a limited exception and never carries work.
+- A direct ask is consult or read-only. Consult means asking questions and looking up information. Read-only means reading what the other bot allows you to see. It changes nothing: the asker does not ask the other bot to do work (no executing, forwarding, writing, or running on its behalf), and does not change anything of the other bot's (files, settings, memory, or project). Assigning work, touching another bot's project, and spending quota go up the org line. The asker still sends its own eight-line report up.
+- A bot that gets a direct ask only answers. It does not take the ask as an assignment. If the ask is really a task, it replies that the task must go up the org line.
 - You still report up. That path stays open.
 
 ## Meeting rooms
@@ -190,5 +193,5 @@ Changed rows go inside the eight-line report. Template: [../templates/task-board
 - NEVER invent a status token, a secret, or a missing fact.
 - NEVER treat a report review as project QA. Testing stays inside the project.
 - NEVER commit, push, or package without an explicit yes for that action.
-- NEVER message another lead directly. The Knowledge Manager is not a lead. Asking that bot is allowed.
+- NEVER message another lead directly, unless both rows are marked `peer: lead` in `Roster meta` on the private roster, and then only consult or read-only. The Knowledge Manager is not a lead. Asking that bot is allowed. A bot marked `kind: special` in `Roster meta` on the private roster may be asked too: consult or read-only, and it changes nothing.
 - NEVER commit a backup the secret scan rejected. NEVER force-push. NEVER copy `index.db` into a backup.

@@ -31,7 +31,7 @@ You produce one plan the human can say yes or no to. The interview is done when 
 - CEO, two exec layers: the human is the CEO. You, the existing main bot, are the chief of staff. A COO and a CTO report to you. Software project offices report to the CTO. Operations and content team offices report to the COO. Placeholder names only: Project Office A/B/C, Team Office X/Y/Z. You do not create a second chief of staff.
 - You ask which offices have real work, what each lead is called, and who they report to.
 - One project or one team gets one lead.
-- You say that leads do not contact each other, and you let the human object.
+- You say that leads do not contact each other, and you let the human object. Exceptions are asked in question 5c.
 - You offer an optional Knowledge Manager. It is not required. It sits beside the coordinators, or beside the COO and the CTO. It reports to you. In the CEO shape that is the chief of staff. It does not report to the COO or the CTO. It serves every bot. Leads may ask it. Leads still do not message each other. The spec is [knowledge-manager.md](knowledge-manager.md).
 - You show a few lines or a simple diagram in the human's language. You omit the Knowledge Manager box when they decline it.
 - Exit when: they confirm the diagram, including any mix, and they have said yes or no to the Knowledge Manager.
@@ -65,6 +65,63 @@ Shape only, to translate, not to paste over their language: "Two shapes. Owner: 
 - You will record `preferred_language` on the private roster and in `docs/style.md`.
 - If they have not used a name, you ask for one. You do not invent a nickname.
 - Exit when: language and form of address are both known.
+
+## 5b. Persona (optional)
+
+- Goal: `no`, or `yes` with choice `a` or `b`.
+- One question, two answers: "Do you want each role to have a persona? It only changes how they word things." Yes or no.
+- You say in one sentence: a persona never changes the rules, a role's scope, the eight-line report, facts, length limits, or which actions wait for their yes.
+- No: you write nothing about persona into the memory repo. No `## Persona` block in any long brief, no `persona` line in `docs/style.md`. The plan says "no persona".
+- Yes: you ask one more question. (a) They set each role's persona, with your help. (b) You design one per role from its type, and they can change any line.
+- (a), assisted, one role at a time, leads and coordinators only:
+  1. You offer 3 or 4 persona options for the role. Each option is a short label plus one sentence on its tone and style. No sample sentences.
+  2. They pick one, edit one, or write their own description.
+  3. You condense it into the four lines: Tone, Values, Habit, Under pressure. At most 25 characters per line and 120 for all four. It may not cross the boundary above or loosen a check. You show the result with its character counts.
+  4. They confirm, or ask for a change. You write it only after they confirm. No confirmation, nothing written.
+  - If they say no persona for a role at any step, you skip that role and write nothing for it.
+- (b): you start from the table below, adjust one line per role to its job, and show all of them in the plan.
+
+| Role type | Default |
+|---|---|
+| Dev | Rigorous and calm |
+| Marketing, community | Lively |
+| Audit, review | Calm and objective |
+| Ops | Steady and reliable |
+| Coordination (chief of staff, COO, CTO, PMO) | Brief and decisive |
+
+- A role with a `sensitive` item keeps its default. A persona never loosens a check.
+- Only leads and coordinators get a persona. Specialists generated under a lead, and the Knowledge Manager, do not.
+- On yes, after the build you add these lines to `docs/style.md` in the memory repo, in the human's language:
+
+  ```markdown
+  - persona: on
+    - Wording only. Rules, scope, the eight-line report, facts, length limits, and the human's yes win.
+    - on: leads and coordinators use the `## Persona` block in their long brief. off: every bot ignores it.
+    - Turn off one role by deleting its block.
+    - Choice: a (human wrote it) or b (main bot designed it from the role type; human may edit)
+  ```
+
+- Never in a persona: sample sentences, catchphrases, emoji, feelings or body states, nicknames, secrets, contacts, employer-confidential content. A persona never goes into the `CreateAgent` description, an eight-line report, or a deliverable.
+- A hedge is not a yes. You ask once more. If it is still unclear, you record no.
+- Exit when: the answer is no, or yes with `a` or `b` and four lines for each lead and coordinator.
+
+## 5c. Direct asks (optional)
+
+- Goal: (i) `yes`, `no`, or not asked. (ii) a list of special roles, or `none`. (iii) `no`, `all`, a list of leads, or not asked.
+- Default you state: every bot follows the org line. Up one layer, and across only through the layer above. The Knowledge Manager may still be asked.
+- C-level means an `exec` row directly under the chief of staff, such as the COO, CTO, or CMO. In [architecture.md](architecture.md) that is the coordinator layer of the CEO shape. A C-level exec is not a lead.
+- (i) Ask only when the plan has two or more C-level execs: "May the C-level execs ask each other directly?" Yes or no. You suggest no, and you say why: it is looser than the rule that leads do not message each other. You record yes only when the human says yes.
+- (ii) "Is there a role, such as an architect, that every bot may ask directly?" They name roles on the plan, or say none.
+- (iii) Ask only when the plan has two or more leads: "May leads on the same layer ask each other directly?" Same layer means any `lead` row, whoever it reports to. Yes or no. You suggest no, for the same reason as (i). You record yes only when the human says yes. With a yes you ask: "All leads, or only the ones you name?" A named list needs at least two leads on the plan.
+- (i) and (iii) are separate. A C-level exec is not a lead, so (i) covers only `exec` rows and (iii) covers only `lead` rows. A row follows the rule of its own value.
+- A direct ask is consult or read-only. Consult means asking questions and looking up information. Read-only means reading what the other bot allows you to see. It changes nothing: the asker does not ask the other bot to do work (no executing, forwarding, writing, or running on its behalf), and does not change anything of the other bot's (files, settings, memory, or project). Assigning work, touching another bot's project, and spending quota go up the org line. The asker still sends its own eight-line report up.
+- A bot that gets a direct ask only answers. It does not take the ask as an assignment. If the ask is really a task, it replies that the task must go up the org line.
+- Leads do not message each other unless (iii) is yes, and then only leads marked `peer: lead`. That is a limited exception. It never carries work.
+- (i) no, (ii) none, and (iii) no: you write nothing about direct asks. No `Roster meta` section on the roster. You delete the `c-level-direct`, `special-roles`, and `peer-leads` blocks from every long brief.
+- Otherwise you keep the `Roster meta` section on `docs/roster.md`. (i) yes: each C-level exec row gets `layer: c-level`, and you keep the `c-level-direct` block only in those execs' briefs. (ii) names: each named role gets `kind: special`, and you keep the `special-roles` block in every lead and coordinator brief. (iii) yes: each chosen lead row gets `peer: lead`, and you keep the `peer-leads` block in those leads' briefs and in the brief of each coordinator or exec they report to.
+- Only the human sets or changes meta, after a new yes. A bot never adds or removes meta.
+- A hedge is not an answer. You ask once more. If it is still unclear, you record no, none, and no.
+- Exit when: (i) is yes, no, or not asked; (ii) is none or every name matches a bot on the plan; (iii) is no, all, not asked, or two or more names that match leads on the plan.
 
 ## 6. Meeting rooms
 
@@ -122,6 +179,8 @@ After the build, the human talks to you, reads eight-line reports, and asks for 
 - [ ] Sensitive items and data rules
 - [ ] Knowledge Manager: yes or no. If yes, where facts live and the never-store list
 - [ ] Preferred language, form of address, and tone
+- [ ] Persona: no, or yes with `a` or `b`
+- [ ] Direct asks: C-level yes, no, or not asked; special roles, or none; peer leads no, all, named, or not asked
 - [ ] Rooms: name, members, purpose
 - [ ] Private memory repo link that you can read and write
 - [ ] `backup_repo`, who may push, `backup_time`, `backup_timezone`, and `main` or `pr`
@@ -134,6 +193,8 @@ After the build, the human talks to you, reads eight-line reports, and asks for 
 
 - [ ] Memory files written and guidance lines removed
 - [ ] Long briefs in the memory repo, short profiles pointing at it
+- [ ] Persona no: no `## Persona` block and no `persona` line anywhere in the memory repo. Persona yes: blocks filled for leads and coordinators, `persona: on` in `docs/style.md`
+- [ ] Direct asks no, none, and no: no `Roster meta` section and no `c-level-direct`, `special-roles`, or `peer-leads` block anywhere in the memory repo. Otherwise: `Roster meta` on the roster with the looser-rule sentence and the consult-or-read-only sentence, `c-level-direct` kept only in `layer: c-level` briefs, `special-roles` kept in every lead and coordinator brief, `peer-leads` kept only in `peer: lead` briefs and their bosses' briefs
 - [ ] Bots created, ids only on the private roster
 - [ ] Channels created, names and members matching the plan
 - [ ] If the plan includes a Knowledge Manager: `knowledge/` skeleton written, long brief in the memory repo, bot created, id only on the private roster

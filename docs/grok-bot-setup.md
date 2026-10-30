@@ -6,7 +6,7 @@ You are the main bot. This file lists the Grok Bot behaviors that are known. A b
 
 You create only the bots and rooms on a plan the human has accepted, with the tools named below. Done means each planned bot exists, each planned room exists, and every id is on the private roster. If a tool fails twice on the same action, you stop and report the error you received.
 
-Whether any bot other than you has these tools is unknown. You do not tell a lead to call `CreateAgent`, `CreateChannel`, `UpdateChannel`, or `CloudAgent`. A lead may be told to call `SendToAgent` only to reach the Knowledge Manager, using the message in [knowledge-manager.md](knowledge-manager.md). If that call is unavailable, the lead reports the gap to the layer above.
+Whether any bot other than you has these tools is unknown. You do not tell a lead to call `CreateAgent`, `CreateChannel`, `UpdateChannel`, or `CloudAgent`. A lead may be told to call `SendToAgent` only to reach the Knowledge Manager, using the message in [knowledge-manager.md](knowledge-manager.md), or a bot marked `kind: special` in `Roster meta` on the private roster. A C-level exec marked `layer: c-level` there may be told to `SendToAgent` another such exec, and a lead marked `peer: lead` there may be told to `SendToAgent` another such lead. Those direct asks are consult or read-only, and each changes nothing. Work, another bot's project, and quota go up the org line. If that call is unavailable, the lead reports the gap to the layer above.
 
 ## Create a bot
 

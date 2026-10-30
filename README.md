@@ -100,6 +100,25 @@ Bot 會忘。一次摘要、一段新對話，講好的事可能就沒了。架�
 
 會議室是群組頻道。一個頻道最多 6 人，主 bot 算一個。bot 在裡面每回一則，就算進你的每週額度。只把重要決定放進群組。沒被點名就不要說話。
 
+### 個性（選填）
+
+訪談會問一題：要不要幫每個角色加個性。個性只管「怎麼說」，不改規則、授權、八行回報、事實和長度上限。
+
+- 不要：記憶庫裡完全沒有個性這一段，也沒有開關。
+- 要：再選一種。(a) 你自己配：主 bot 每個角色給 3 到 4 個風格選項讓你挑、改或自己寫，再幫你收斂成合字數、不碰守則的四行，你確認才寫入；(b) 主 bot 依崗位給預設，你再改。預設是開發嚴謹沉著、行銷活潑、稽核冷靜客觀、營運穩定可靠、統籌簡潔果斷。
+
+只有主管和協調 bot 有個性，底下的專員沒有。細節在 [docs/interview.md](docs/interview.md) 第 5b 題。
+
+### 溝通路線（選填）
+
+預設 bot 走組織線：只往上一層，要橫向找別人就請上一層轉。訪談第 5c 題問三件事，預設都是不要：
+
+1. C 級互問：只有特助正下方有兩位以上 C 級（例如 COO、CTO、CMO）才問。要的話，這幾位可以直接互問。建議不要，你明確說要才開，因為這比現行「主管之間不互問」更鬆。C 級不是主管，主管互問看第 3 題。
+2. 特殊角色：你指定哪些角色（例如架構師）所有 bot 都能直接問。
+3. 同層主管互問：計畫裡有兩位以上主管（lead）才問。同層指所有主管，不管各自的上司是誰（例如專案主管和 PMO）。建議不要，你明確說要才開。要的話，再選全部主管或只限你點名的幾位。這是「主管之間不互問」的有限例外，仍不能派工。C 級互問和這題分開，各管各的。
+
+三題都不要，記憶庫裡就沒有任何直接聯絡的內容。有選的話，私人名單（roster）會多一段 `Roster meta`，在角色旁標 `layer: c-level`、`kind: special` 或 `peer: lead`，bot 依這段判斷能直接問誰。直接聯絡只能諮詢或唯讀：諮詢是問問題、查資訊，唯讀是看對方允許看的資訊。不能動：不叫對方做事（不請對方代為執行、轉交、代寫、代跑），也不改對方任何東西（檔案、設定、記憶、專案）。派工、動別人專案、花額度一律走組織線往上；提問的 bot 仍自己往上交八行回報。收到直接提問的 bot 只回答，不當成指派；若其實是交辦，會回覆請對方改走組織線。meta 只有你能改。
+
 ### 其他文件
 
 這些檔是英文。
@@ -107,7 +126,7 @@ Bot 會忘。一次摘要、一段新對話，講好的事可能就沒了。架�
 - [AGENTS.md](AGENTS.md) — 主 bot 的入口，含訪談順序和語言規則
 - [docs/architecture.md](docs/architecture.md) — 層級，以及上面兩種例子
 - [docs/operating-rules.md](docs/operating-rules.md) — 共同規則、八行回報、任務板、會議室
-- [docs/interview.md](docs/interview.md) — 訪談題庫。兩種編制都要拿出來選
+- [docs/interview.md](docs/interview.md) — 訪談題庫。兩種編制都要拿出來選；第 5b 題問要不要個性；第 5c 題問 C 級互問、特殊角色和同層主管互問
 - [docs/grok-bot-setup.md](docs/grok-bot-setup.md) — 建立 bot、頻道、傳話，以及已知限制
 - [docs/prompt-quality.md](docs/prompt-quality.md) — 這些提示詞依了哪些寫法，以及刻意沒採用哪些
 - [templates/lead-brief.md](templates/lead-brief.md) — 主管簡述
@@ -216,6 +235,25 @@ Every bot reads it before starting work. When the main bot learns a new habit or
 
 A group chat is a meeting room. The cap is six members, and the main bot counts as one. Each reply a bot sends in the room draws on your weekly quota. Save rooms for decisions that need them. A bot speaks only when it is named.
 
+### Persona (optional)
+
+The interview asks one question: should each role get a persona? A persona changes wording only. Rules, scope, the eight-line report, facts, and length limits stay the same.
+
+- No: the memory repo has no persona section and no switch.
+- Yes: pick one. (a) You set it yourself: the main bot offers 3 or 4 style options per role to pick, edit, or replace, condenses your choice into four lines within the limits and the rules, and writes it only after you confirm. (b) The main bot starts from a default per role type and you edit it. Defaults: dev rigorous and calm, marketing lively, audit calm and objective, ops steady and reliable, coordination brief and decisive.
+
+Only leads and coordinators get one. Specialists under them do not. Details are in question 5b of [docs/interview.md](docs/interview.md).
+
+### Routing between bots (optional)
+
+By default bots follow the org line: up one layer, and across only through the layer above. Question 5c of the interview asks three things, and all default to no:
+
+1. C-level direct asks: asked only when two or more C-level execs (for example COO, CTO, CMO) sit directly under the chief of staff. With a yes, they may ask each other directly. The suggestion is no, opened only when you say yes, because it is looser than the current rule that leads do not message each other. A C-level exec is not a lead. For leads, see item 3.
+2. Special roles: you name roles (for example an architect) that every bot may ask directly.
+3. Peer leads: asked only when the plan has two or more leads. Same layer means every lead, whoever each reports to (for example a project lead and the PMO). The suggestion is no, opened only when you say yes. With a yes, you pick all leads or only the ones you name. This is a limited exception to the rule that leads do not message each other, and it still never assigns work. C-level direct asks and this item are separate, and each covers its own rows.
+
+With all three no, the memory repo has no direct-ask content at all. Otherwise the private roster gets a `Roster meta` section that marks a role `layer: c-level`, `kind: special`, or `peer: lead`, and bots decide who they may ask from that section. A direct ask is consult or read-only: consult means asking questions and looking up information, and read-only means reading what the other bot allows you to see. It changes nothing: the asker does not ask the other bot to do work (no executing, forwarding, writing, or running on its behalf), and does not change anything of the other bot's (files, settings, memory, or project). Assigning work, touching another bot's project, and spending quota go up the org line. The asker still sends its own eight-line report up. A bot that gets a direct ask only answers and does not take it as an assignment. If it is really a task, it replies that the task must go up the org line. Only you change meta.
+
 ### Other docs
 
 These files are English.
@@ -223,7 +261,7 @@ These files are English.
 - [AGENTS.md](AGENTS.md) — entry file for the main bot: interview order and the language rule
 - [docs/architecture.md](docs/architecture.md) — layers, including both example shapes
 - [docs/operating-rules.md](docs/operating-rules.md) — shared rules, the eight-line report, the task board, meeting rooms
-- [docs/interview.md](docs/interview.md) — question bank; offer both shapes
+- [docs/interview.md](docs/interview.md) — question bank; offer both shapes; question 5b asks about persona; question 5c asks about C-level direct asks, special roles, and peer leads
 - [docs/grok-bot-setup.md](docs/grok-bot-setup.md) — creating bots and channels, sending messages, known limits
 - [docs/prompt-quality.md](docs/prompt-quality.md) — which prompt rules this repo follows, and which it leaves out
 - [templates/lead-brief.md](templates/lead-brief.md) — lead brief

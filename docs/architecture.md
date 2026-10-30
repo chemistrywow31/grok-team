@@ -77,7 +77,7 @@ Who coordinates, and who does the work:
 
 - The chief of staff, the COO, and the CTO coordinate and review direction. They do not run project QA or other project testing. They do not edit project repos.
 - The office lead does that office's work, updates its progress page and task board, and sends the eight-line report up one layer.
-- Offices do not message each other. Cross-office work goes up, then across. A shared fact is the exception: any bot may ask the Knowledge Manager. That bot is not an office lead.
+- Offices do not message each other. Cross-office work goes up, then across. A shared fact is the exception: any bot may ask the Knowledge Manager. That bot is not an office lead. A bot marked `kind: special` in `Roster meta`, when the human chose one in interview question 5c, may also be asked: consult or read-only, and the ask changes nothing. Leads marked `peer: lead` there may ask each other the same way.
 
 A standing room, if you open one, is the chief of staff plus the COO and the CTO. The CEO joins only if they want to. Office leads stay out until someone names them. The cap is 6 members, including the main bot. See [operating-rules.md](operating-rules.md).
 
@@ -121,7 +121,7 @@ Optional. Reports to the main bot, who is the chief of staff in the CEO shape. S
 
 Does the named scope. Keeps the progress page and the task board checkable. When a status changes, sends one eight-line report up one layer.
 
-A lead does not contact another lead. Ask the layer above. A lead may `SendToAgent` the Knowledge Manager when that bot is on the roster. The Knowledge Manager is not a lead.
+A lead does not contact another lead. Ask the layer above. A lead may `SendToAgent` the Knowledge Manager when that bot is on the roster. The Knowledge Manager is not a lead. The other exceptions come from `Roster meta` on the private roster, set by the human in interview question 5c: any bot may ask a bot marked `kind: special`, C-level execs marked `layer: c-level` may ask each other, and leads marked `peer: lead` may ask each other, whoever they report to. A direct ask is consult or read-only, and it changes nothing. Assigning work, touching another bot's project, and spending quota go up the org line. A C-level exec is not a lead.
 
 A lead does not merge. Code changes go to a cloud coding agent, on a branch, delivered as a PR. See [operating-rules.md](operating-rules.md).
 
