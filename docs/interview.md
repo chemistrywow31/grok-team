@@ -32,11 +32,11 @@ You produce one plan the human can say yes or no to. The interview is done when 
 - You ask which offices have real work, what each lead is called, and who they report to.
 - One project or one team gets one lead.
 - You say that leads do not contact each other, and you let the human object. Exceptions are asked in question 5c.
-- You offer an optional Knowledge Manager. It is not required. It sits beside the coordinators, or beside the COO and the CTO. It reports to you. In the CEO shape that is the chief of staff. It does not report to the COO or the CTO. It serves every bot. Leads may ask it. Leads still do not message each other. The spec is [knowledge-manager.md](knowledge-manager.md).
+- You offer an optional Knowledge Manager. It is not required. A yes means two bots: the Knowledge Writer, the only bot that writes topic files, and the Knowledge Reader, which answers and writes nothing. It sits beside the coordinators, or beside the COO and the CTO. It reports to you. In the CEO shape that is the chief of staff. It does not report to the COO or the CTO. It serves every bot. Leads may ask it. Leads still do not message each other. The spec is [knowledge-manager.md](knowledge-manager.md).
 - You show a few lines or a simple diagram in the human's language. You omit the Knowledge Manager box when they decline it.
 - Exit when: they confirm the diagram, including any mix, and they have said yes or no to the Knowledge Manager.
 
-Shape only, to translate, not to paste over their language: "Two shapes. Owner: you, me, then one lead per project. CEO: you at the top, me as chief of staff, then a COO and a CTO, then one lead per office. Optional either way: a Knowledge Manager beside the execs, reporting to me, for facts every bot may reuse. We can mix. Which parts do you want?"
+Shape only, to translate, not to paste over their language: "Two shapes. Owner: you, me, then one lead per project. CEO: you at the top, me as chief of staff, then a COO and a CTO, then one lead per office. Optional either way: a Knowledge Manager beside the execs, reporting to me, for facts every bot may reuse. That is two bots: a writer that records facts and a reader that answers. We can mix. Which parts do you want?"
 
 ## 3. Who can say yes
 
@@ -197,6 +197,6 @@ After the build, the human talks to you, reads eight-line reports, and asks for 
 - [ ] Direct asks no, none, and no: no `Roster meta` section and no `c-level-direct`, `special-roles`, or `peer-leads` block anywhere in the memory repo. Otherwise: `Roster meta` on the roster with the looser-rule sentence and the consult-or-read-only sentence, `c-level-direct` kept only in `layer: c-level` briefs, `special-roles` kept in every lead and coordinator brief, `peer-leads` kept only in `peer: lead` briefs and their bosses' briefs
 - [ ] Bots created, ids only on the private roster
 - [ ] Channels created, names and members matching the plan
-- [ ] If the plan includes a Knowledge Manager: `knowledge/` skeleton written, long brief in the memory repo, bot created, id only on the private roster
+- [ ] If the plan includes a Knowledge Manager: `knowledge/` skeleton written, writer and reader briefs in the memory repo, both bots created, ids only on the private roster
 - [ ] Roster has `backup_repo`, `backup_time`, `backup_timezone`, `backup_push`, and `backup_branch`
 - [ ] `backup/` skeleton is in the memory repo, and the `daily-backup` routine is saved on the main bot

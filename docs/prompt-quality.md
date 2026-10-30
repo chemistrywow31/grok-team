@@ -1,6 +1,6 @@
 # Prompt quality
 
-You are reading why the bot prompts in this repo are shaped this way. The prompts themselves are `AGENTS.md`, `docs/operating-rules.md`, `docs/interview.md`, `docs/grok-bot-setup.md`, `docs/knowledge-manager.md`, `docs/backup.md`, `docs/restore.md`, `templates/lead-brief.md`, `templates/coordinator-brief.md`, `templates/knowledge-manager-brief.md`, `templates/backup-routine-prompt.md`, `templates/backup-export-request.md`, `templates/memory-repo/AGENTS.md`, and the two copy-paste lines in the README quick start.
+You are reading why the bot prompts in this repo are shaped this way. The prompts themselves are `AGENTS.md`, `docs/operating-rules.md`, `docs/interview.md`, `docs/grok-bot-setup.md`, `docs/knowledge-manager.md`, `docs/backup.md`, `docs/restore.md`, `templates/lead-brief.md`, `templates/coordinator-brief.md`, `templates/knowledge-writer-brief.md`, `templates/knowledge-reader-brief.md`, `templates/backup-routine-prompt.md`, `templates/backup-export-request.md`, `templates/memory-repo/AGENTS.md`, and the two copy-paste lines in the README quick start.
 
 This file is notes for a person editing those prompts. It is not a bot persona.
 

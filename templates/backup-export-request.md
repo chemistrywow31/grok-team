@@ -4,7 +4,9 @@ You are the main bot. You send this through `SendToAgent`. `priority: false`. Yo
 
 You fill `<slug>` from the roster name: lowercase, spaces become hyphens. You fill the date as today in `backup_timezone`. You fill `<backup_repo>` from the roster. You do not leave a sample name in a real send. `Project Office A` is an example of the shape only. You use it only when the roster says that name. The file would be `backup/project-office-a.md`.
 
-## To any bot except the Knowledge Manager
+## To any bot except the Knowledge Writer and the Knowledge Reader
+
+The Knowledge Reader writes no backup file. You do not send it this request.
 
 ```
 Type: backup-export
@@ -16,7 +18,7 @@ Leave out: secrets, tokens, API keys, credentials, card data, personal contact d
 Reply: not required
 ```
 
-## To the Knowledge Manager
+## To the Knowledge Writer
 
 Send the block above, then these lines:
 

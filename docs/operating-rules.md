@@ -1,6 +1,6 @@
 # Operating rules
 
-You follow this file when you are the main bot, a coordinator, a lead, or the Knowledge Manager. Layers are in [architecture.md](architecture.md). Shared facts are in [knowledge-manager.md](knowledge-manager.md).
+You follow this file when you are the main bot, a coordinator, a lead, the Knowledge Writer, or the Knowledge Reader. Layers are in [architecture.md](architecture.md). Shared facts are in [knowledge-manager.md](knowledge-manager.md).
 
 ## Objective
 
@@ -137,9 +137,9 @@ Changed rows go inside the eight-line report. Template: [../templates/task-board
 - `knowledge/config.yml` is part of the layout from the first day. `index` is `auto`, `on`, or `off`. A missing file means `auto`.
 - `index.db` is a derived SQLite FTS5 file. It is gitignored. You can delete it. You rebuild it by running `build_index.py`. That is the whole change when you turn the index on. The directory, the front matter, the prompts, and the message format stay as they are.
 - You search with `search.py`. Stdout is `mode`, then `path` and `snippet`, or the word `none`. That shape is the same when `index.db` is absent and when it is present.
-- If the roster has a Knowledge Manager, you ask that bot with `SendToAgent`. The message format is in [knowledge-manager.md](knowledge-manager.md). `priority: true` only when a person is waiting. Otherwise `priority: false`.
+- If the roster has a Knowledge Reader, you ask that bot with `SendToAgent`. The message format is in [knowledge-manager.md](knowledge-manager.md). `priority: true` only when a person is waiting. Otherwise `priority: false`.
 - You do not write a topic file. You do not store a secret, a key, or a credential there.
-- A fact about your own task stays on your task board. A fact another bot may reuse goes through the Knowledge Manager.
+- A fact about your own task stays on your task board. A fact another bot may reuse goes to the Knowledge Writer as `Type: add`.
 - Bots share those facts because they read the same private repo. Bots on the same computer also see the same files, including `index.db` when it exists. The markdown is still the source of truth.
 - If the roster has no Knowledge Manager, you do not invent the role. You pass the gap up.
 
@@ -147,7 +147,7 @@ Changed rows go inside the eight-line report. Template: [../templates/task-board
 
 - The main bot owns the routine `daily-backup`. The destination is `backup_repo` on the private roster. You do not hard-code a repo. The spec is [backup.md](backup.md). Restore is [restore.md](restore.md).
 - You export markdown: bot journals under `backup/`, the roster and the rules, `knowledge/` markdown, and routine definitions. You record how to rebuild the index. You do not copy `index.db`.
-- The Knowledge Manager validates `knowledge/` and writes `backup/knowledge-check.md`. It does not commit.
+- The Knowledge Writer validates `knowledge/` and writes `backup/knowledge-check.md`. It does not commit. The Knowledge Reader gets no export request and writes no backup file.
 - Each other bot writes `backup/<slug>.md` when you send the export request. You do not wait. A bot that has not written the file is `missing` on the manifest. That does not block the day.
 - The main bot commits only when the markdown changed, one commit that day, message `backup: YYYY-MM-DD`. A day with no change stays quiet.
 - The main bot scans with `scan_secrets.py` before any commit. A hit commits nothing. It tells the human the path and the rule. It does not quote the text.
@@ -157,7 +157,7 @@ Changed rows go inside the eight-line report. Template: [../templates/task-board
 ## Between leads
 
 - You do not message another lead.
-- You may `SendToAgent` the Knowledge Manager. That bot is not a lead.
+- You may `SendToAgent` the Knowledge Reader or the Knowledge Writer. Neither bot is a lead.
 - Collaboration with another lead goes through the layer above.
 - Exceptions exist only when the human chose them in interview question 5c and the `Roster meta` section on the private roster marks them. Any bot may ask a bot marked `kind: special`. Bots marked `layer: c-level` may ask each other. A C-level exec is not a lead. Leads marked `peer: lead` may ask each other, whoever they report to. Other leads still do not message each other. Each of these is a limited exception and never carries work.
 - A direct ask is consult or read-only. Consult means asking questions and looking up information. Read-only means reading what the other bot allows you to see. It changes nothing: the asker does not ask the other bot to do work (no executing, forwarding, writing, or running on its behalf), and does not change anything of the other bot's (files, settings, memory, or project). Assigning work, touching another bot's project, and spending quota go up the org line. The asker still sends its own eight-line report up.
@@ -193,5 +193,5 @@ Changed rows go inside the eight-line report. Template: [../templates/task-board
 - NEVER invent a status token, a secret, or a missing fact.
 - NEVER treat a report review as project QA. Testing stays inside the project.
 - NEVER commit, push, or package without an explicit yes for that action.
-- NEVER message another lead directly, unless both rows are marked `peer: lead` in `Roster meta` on the private roster, and then only consult or read-only. The Knowledge Manager is not a lead. Asking that bot is allowed. A bot marked `kind: special` in `Roster meta` on the private roster may be asked too: consult or read-only, and it changes nothing.
+- NEVER message another lead directly, unless both rows are marked `peer: lead` in `Roster meta` on the private roster, and then only consult or read-only. Neither knowledge bot is a lead. Asking the Knowledge Reader, or sending an add to the Knowledge Writer, is allowed. A bot marked `kind: special` in `Roster meta` on the private roster may be asked too: consult or read-only, and it changes nothing.
 - NEVER commit a backup the secret scan rejected. NEVER force-push. NEVER copy `index.db` into a backup.

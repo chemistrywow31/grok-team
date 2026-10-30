@@ -60,16 +60,16 @@ Rules: `pem`, `api-key`, `password`, `token`, `secret-key`, `card`, `email`, `ph
 
 On any hit you commit nothing. You tell the human the path and the rule. You do not quote the text. You do not delete the file unless they say so. You do not call `CloudAgent`.
 
-You also refuse a topic file the Knowledge Manager marks `secret-never-store`. That file is not part of the commit.
+You also refuse a topic file the Knowledge Writer marks `secret-never-store`. That file is not part of the commit.
 
 ## How a day runs
 
 1. Read the roster fields. If one is missing, stop and ask. The routine does not invent a time or a repo.
-2. Read `backup/`. A bot is `present` when `backup/<slug>.md` exists and its `updated` date is the date of the previous run or today, in `backup_timezone`. Otherwise it is `missing`. A missing bot does not block the day.
+2. Read `backup/`. A bot is `present` when `backup/<slug>.md` exists and its `updated` date is the date of the previous run or today, in `backup_timezone`. Otherwise it is `missing`. A missing bot does not block the day. The Knowledge Reader writes no backup file, so it is not listed.
 3. Write your own `backup/main-bot.md`. In the CEO shape the file is still `backup/main-bot.md`. The roster name stays Chief of Staff inside the file.
-4. If the roster has a Knowledge Manager and `backup/knowledge-check.md` has arrived, keep it. If it has not arrived, write the rebuild instructions yourself and set `knowledge check: missing` on the manifest. You still do not copy a database.
+4. If the roster has a Knowledge Writer and `backup/knowledge-check.md` has arrived, keep it. If it has not arrived, write the rebuild instructions yourself and set `knowledge check: missing` on the manifest. You still do not copy a database.
 5. Run the secret scan. On a hit, stop as above. You do not ask for more files in that run.
-6. Send today's export requests so the next run has files to collect. The message is [../templates/backup-export-request.md](../templates/backup-export-request.md). `SendToAgent` with `priority: false`. You do not wait. A reply is not required. The file is the contribution. Whether that call spends weekly quota is unknown. This send is not a message to the human.
+6. Send today's export requests so the next run has files to collect. The message is [../templates/backup-export-request.md](../templates/backup-export-request.md). `SendToAgent` with `priority: false`, to each bot except the Knowledge Reader. You do not wait. A reply is not required. The file is the contribution. Whether that call spends weekly quota is unknown. This send is not a message to the human.
 7. Decide if anything changed. Compare the markdown with what `backup_repo` already has. `backup/requests.md` does not count. If nothing else differs, stop. Send the human no message.
 8. If `backup_push` is `human`, tell them the paths and stop. You do not call `CloudAgent`.
 9. If `backup_push` is `main bot`, and this calendar date does not already have a commit whose message is `backup: YYYY-MM-DD`, call `CloudAgent` once. The date is the human's date in `backup_timezone`. If that commit already exists, send the human no message.
@@ -96,7 +96,7 @@ The instruction you give the agent: change only the markdown paths you prepared;
 
 ## How other bots contribute
 
-You send the export request. Each bot writes its own `backup/<slug>.md` on the shared filesystem and does not commit. The Knowledge Manager also writes `backup/knowledge-check.md`: topic count, any refused path with a rule name and no secret text, `index_copied: no`, and the rebuild command. The Knowledge Manager does not copy a database and does not commit.
+You send the export request. Each bot writes its own `backup/<slug>.md` on the shared filesystem and does not commit. The Knowledge Writer also writes `backup/knowledge-check.md`: topic count, any refused path with a rule name and no secret text, `index_copied: no`, and the rebuild command. The Knowledge Writer does not copy a database and does not commit. The Knowledge Reader gets no export request and writes no backup file.
 
 You collect on the next run whatever files have arrived. Silence from a bot becomes `missing` on the manifest.
 

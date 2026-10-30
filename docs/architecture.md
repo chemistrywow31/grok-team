@@ -27,7 +27,7 @@ flowchart TD
   ops[Ops coordinator]
   a[Project A lead]
   b[Project B lead]
-  km[Knowledge Manager]
+  km[Knowledge Writer and Reader]
   user --> main
   main --> dev
   main --> ops
@@ -58,7 +58,7 @@ flowchart TD
   tx[Team Office X]
   ty[Team Office Y]
   tz[Team Office Z]
-  km[Knowledge Manager]
+  km[Knowledge Writer and Reader]
   ceo --> cos
   cos --> coo
   cos --> cto
@@ -77,7 +77,7 @@ Who coordinates, and who does the work:
 
 - The chief of staff, the COO, and the CTO coordinate and review direction. They do not run project QA or other project testing. They do not edit project repos.
 - The office lead does that office's work, updates its progress page and task board, and sends the eight-line report up one layer.
-- Offices do not message each other. Cross-office work goes up, then across. A shared fact is the exception: any bot may ask the Knowledge Manager. That bot is not an office lead. A bot marked `kind: special` in `Roster meta`, when the human chose one in interview question 5c, may also be asked: consult or read-only, and the ask changes nothing. Leads marked `peer: lead` there may ask each other the same way.
+- Offices do not message each other. Cross-office work goes up, then across. A shared fact is the exception: any bot may ask the Knowledge Reader, or send an add to the Knowledge Writer. Neither bot is an office lead. A bot marked `kind: special` in `Roster meta`, when the human chose one in interview question 5c, may also be asked: consult or read-only, and the ask changes nothing. Leads marked `peer: lead` there may ask each other the same way.
 
 A standing room, if you open one, is the chief of staff plus the COO and the CTO. The CEO joins only if they want to. Office leads stay out until someone names them. The cap is 6 members, including the main bot. See [operating-rules.md](operating-rules.md).
 
@@ -99,7 +99,7 @@ In the CEO shape this same bot is the chief of staff.
 
 The lead writes the lead's progress page. The main bot does not write it for them.
 
-When the plan includes a Knowledge Manager, the main bot writes the `knowledge/` skeleton once. After that, only the Knowledge Manager edits topic files. The markdown there is the source of truth. `index.db` is derived. Turning search over to the index later is one script, `build_index.py`. The directory, the front matter, the prompts, and the ask/answer messages stay as they are. See [knowledge-manager.md](knowledge-manager.md).
+When the plan includes a Knowledge Manager, the main bot writes the `knowledge/` skeleton once. After that, only the Knowledge Writer edits topic files, in a local copy. The markdown there is the source of truth. `index.db` is derived. Turning search over to the index later is one script, `build_index.py`. The directory, the front matter, the prompts, and the ask/answer messages stay as they are. See [knowledge-manager.md](knowledge-manager.md).
 
 The main bot also owns the daily backup routine. It exports markdown into `backup_repo` from the roster. It does not clone that repo. It hands the commit to `CloudAgent`. See [backup.md](backup.md).
 
@@ -115,13 +115,13 @@ Reading a report means the report was read. Testing and QA stay inside the proje
 
 ### Knowledge Manager
 
-Optional. Reports to the main bot, who is the chief of staff in the CEO shape. Sits beside the coordinators or beside the COO and the CTO. Does not report to them. Answers shared questions from `knowledge/*.md` and is the only writer of those topic files after the skeleton exists. Does not run a project, edit a task board, or edit a project repo. Any bot may `SendToAgent` it. It is not a lead, so that ask does not break the no-peer-lead rule. The search command and the ask format stay the same whether or not `index.db` exists. On a backup export it validates `knowledge/` and writes `backup/knowledge-check.md`. It does not copy `index.db` and it does not commit. See [knowledge-manager.md](knowledge-manager.md).
+Optional. Two bots: the Knowledge Writer and the Knowledge Reader. Both report to the main bot, who is the chief of staff in the CEO shape. They sit beside the coordinators or beside the COO and the CTO. They do not report to them. The reader answers shared questions from `knowledge/*.md` and writes nothing. The writer is the only bot that edits those topic files after the skeleton exists. It writes in a local copy and does not commit or push. Neither runs a project, edits a task board, or edits a project repo. Any bot may `SendToAgent` the reader with an ask, or the writer with an add. Neither is a lead, so that message does not break the no-peer-lead rule. The search command and the ask format stay the same whether or not `index.db` exists. On a backup export the writer validates `knowledge/` and writes `backup/knowledge-check.md`. The reader writes no backup file. Neither copies `index.db` or commits. See [knowledge-manager.md](knowledge-manager.md).
 
 ### Lead
 
 Does the named scope. Keeps the progress page and the task board checkable. When a status changes, sends one eight-line report up one layer.
 
-A lead does not contact another lead. Ask the layer above. A lead may `SendToAgent` the Knowledge Manager when that bot is on the roster. The Knowledge Manager is not a lead. The other exceptions come from `Roster meta` on the private roster, set by the human in interview question 5c: any bot may ask a bot marked `kind: special`, C-level execs marked `layer: c-level` may ask each other, and leads marked `peer: lead` may ask each other, whoever they report to. A direct ask is consult or read-only, and it changes nothing. Assigning work, touching another bot's project, and spending quota go up the org line. A C-level exec is not a lead.
+A lead does not contact another lead. Ask the layer above. A lead may `SendToAgent` the Knowledge Reader or the Knowledge Writer when they are on the roster. Neither is a lead. The other exceptions come from `Roster meta` on the private roster, set by the human in interview question 5c: any bot may ask a bot marked `kind: special`, C-level execs marked `layer: c-level` may ask each other, and leads marked `peer: lead` may ask each other, whoever they report to. A direct ask is consult or read-only, and it changes nothing. Assigning work, touching another bot's project, and spending quota go up the org line. A C-level exec is not a lead.
 
 A lead does not merge. Code changes go to a cloud coding agent, on a branch, delivered as a PR. See [operating-rules.md](operating-rules.md).
 

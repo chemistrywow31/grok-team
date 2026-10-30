@@ -32,7 +32,7 @@ status: unverified
 
 `sensitivity` is `public`, `internal`, or `secret-never-store`. Do not use `secret-never-store` as a place to keep a secret. Refuse the text and tell the human in person.
 
-`status` is `active`, `unverified`, or `stale`. `active` means the Knowledge Manager has checked the source. A newer `active` file on the same `topic` wins. The older `active` file is marked `stale`. An `unverified` file does not replace an `active` one.
+`status` is `active`, `unverified`, or `stale`. `active` means the Knowledge Writer has checked the source. A newer `active` file on the same `topic` wins. The older `active` file is marked `stale`. An `unverified` file does not replace an `active` one.
 
 ## Never store
 
@@ -43,14 +43,16 @@ If a note matches that list, do not write it in this directory, in chat, or in t
 
 ## Who writes
 
-Only the Knowledge Manager creates or edits topic files after the skeleton exists. Other bots send an add request. They do not edit these files.
+Only the Knowledge Writer creates or edits topic files and `INDEX.md` after the skeleton exists, in a local copy. Other bots send an add request to the writer. They do not edit these files.
 
-The scripts live in the framework at `templates/knowledge/`. Read them by URL and run them with `python3` against this directory. Entry point:
+The scripts live in the framework at `templates/knowledge/`. Read them by URL and run them with `python3` against this directory. The Knowledge Reader starts at `INDEX.md`. `search.py` is the fallback:
 
 ```sh
 python3 search.py --knowledge /path/to/knowledge "your query"
 ```
 
 `README.md` in this folder is the guide. It is not a topic file. The search skips it.
+
+`INDEX.md` is the table of contents: one line per topic file, no front matter. It is not a topic file and not a citation source. `build_index.py` prints `INDEX.md: missing front matter` for it. That one line is expected.
 
 Bots share these facts because they read this same private repo. Bots on the same computer also see the same files on disk, including `index.db` if it exists. The markdown is still the source of truth.

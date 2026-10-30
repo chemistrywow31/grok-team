@@ -13,7 +13,8 @@
 | name | role | reports_to | id | channel |
 | --- | --- | --- | --- | --- |
 | Main bot | main bot | Human | (fill after creation) | |
-| Knowledge Manager | knowledge manager | Main bot | (fill after creation) | |
+| Knowledge Writer | knowledge writer | Main bot | (fill after creation) | |
+| Knowledge Reader | knowledge reader | Main bot | (fill after creation) | |
 | (name) | (coordinator, exec, or lead) | (name of the layer above) | (fill after creation) | |
 
 Delete the Knowledge Manager row when the human declined that role. In the CEO shape, `reports_to` for that row is Chief of Staff. Leads may ask it. Leads still do not message each other.

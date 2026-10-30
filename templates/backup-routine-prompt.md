@@ -26,10 +26,10 @@ You export today's durable markdown into `backup_repo`. Done means one commit or
 1. Read the five roster fields. If one is empty, tell the human and stop.
 2. If Settings shows a different timezone from `backup_timezone`, tell the human and stop. You do not guess which clock fired.
 3. Mark each other bot `present` or `missing`. `present` means `backup/<slug>.md` exists and `updated` is the previous run's date or today in `backup_timezone`. A missing bot does not block you.
-4. Write `backup/main-bot.md` and refresh `backup/manifest.md` and `backup/routines.md`. Copy index rebuild instructions into `backup/knowledge-check.md` when the Knowledge Manager has not delivered that file. Set `index_copied: no`.
+4. Write `backup/main-bot.md` and refresh `backup/manifest.md` and `backup/routines.md`. Copy index rebuild instructions into `backup/knowledge-check.md` when the Knowledge Writer has not delivered that file. Set `index_copied: no`.
 5. Run `python3 scan_secrets.py --root <directory>`. You scan the markdown you would commit.
 6. If the script exits 1, tell the human each `hit` line. Do not quote the secret. Do not call `CloudAgent`. Stop.
-7. Send the export request at https://raw.githubusercontent.com/chemistrywow31/grok-team/main/templates/backup-export-request.md through `SendToAgent` with `priority: false` to each other bot. Do not wait. A reply is not required. Do not tell the human about this send.
+7. Send the export request at https://raw.githubusercontent.com/chemistrywow31/grok-team/main/templates/backup-export-request.md through `SendToAgent` with `priority: false` to each other bot except the Knowledge Reader. Do not wait. A reply is not required. Do not tell the human about this send.
 8. If nothing changed except `backup/requests.md`, stop with no message to the human.
 9. If a commit `backup: YYYY-MM-DD` already exists for today in `backup_timezone`, stop with no message to the human.
 10. If `backup_push` is `human`, send the paths and stop. Do not call `CloudAgent`.

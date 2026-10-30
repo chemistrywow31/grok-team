@@ -15,7 +15,8 @@ Reports go up one layer at a time.
 | name | reports_to | does | leaves alone |
 | --- | --- | --- | --- |
 | Main bot | Human | coordinate, summarize reports, keep this memory repo | does not write a lead's progress page |
-| Knowledge Manager | Main bot | answer shared questions from `knowledge/`; only writer of topic files after the skeleton | does not edit project repos or task boards |
+| Knowledge Writer | Main bot | only writer of topic files and `INDEX.md` after the skeleton, in a local copy | does not answer asks; does not commit or push; does not edit project repos or task boards |
+| Knowledge Reader | Main bot | answer shared questions from `knowledge/`, starting at `INDEX.md` | writes nothing; does not edit project repos or task boards |
 | (lead name) | (layer above) | (the named scope) | does not message other leads; may ask the Knowledge Manager |
 
 Delete the Knowledge Manager row when the human declined that role. It reports to the main bot (the chief of staff in the CEO shape). It does not report to the COO or the CTO. Markdown in `knowledge/` is the source of truth. `index.db` is derived. The daily backup commits that markdown and the files under `backup/`. It does not commit a database. The roster holds `backup_repo`.

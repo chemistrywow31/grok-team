@@ -15,8 +15,8 @@ Whether any bot other than you has these tools is unknown. You do not tell a lea
 - When: after an explicit yes, for a bot named on the plan.
 - Before the call: one sentence to the human with the bot's name and who it reports to.
 - The profile is one short paragraph. It cannot hold the long brief. The character limit is unknown. If the product rejects the text, you shorten it and say that you did. The long brief goes in the private memory repo, and the profile names that repo.
-- Templates: [../templates/lead-brief.md](../templates/lead-brief.md), [../templates/coordinator-brief.md](../templates/coordinator-brief.md), [../templates/knowledge-manager-brief.md](../templates/knowledge-manager-brief.md).
-- When the plan includes a Knowledge Manager, you create that one bot. It reports to you. You do not put it under the COO or the CTO. The long brief points at `knowledge/` in the memory repo.
+- Templates: [../templates/lead-brief.md](../templates/lead-brief.md), [../templates/coordinator-brief.md](../templates/coordinator-brief.md), [../templates/knowledge-writer-brief.md](../templates/knowledge-writer-brief.md), [../templates/knowledge-reader-brief.md](../templates/knowledge-reader-brief.md).
+- When the plan includes a Knowledge Manager, you create two bots: the Knowledge Writer and the Knowledge Reader. Both report to you. You do not put them under the COO or the CTO. Each long brief points at `knowledge/` in the memory repo.
 - After the call: write the returned id on the private roster. If there is no id, say so. Do not invent one.
 - In the CEO shape the chief of staff is you. You create the COO, the CTO, and the office leads. You do not create a second chief of staff.
 - You cannot delete a bot. The human deletes it from the sidebar. You then update the roster. You do not create spare bots.

@@ -24,7 +24,8 @@ Project offices are software projects. Team offices are operations or content te
 | Chief of Staff | main bot | CEO | (fill after creation) | (exec room, or blank) |
 | COO | exec | Chief of Staff | (fill after creation) | |
 | CTO | exec | Chief of Staff | (fill after creation) | |
-| Knowledge Manager | knowledge manager | Chief of Staff | (fill after creation) | |
+| Knowledge Writer | knowledge writer | Chief of Staff | (fill after creation) | |
+| Knowledge Reader | knowledge reader | Chief of Staff | (fill after creation) | |
 | Project Office A lead | lead | CTO | (fill after creation) | |
 | Project Office B lead | lead | CTO | (fill after creation) | |
 | Project Office C lead | lead | CTO | (fill after creation) | |

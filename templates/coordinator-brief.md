@@ -83,7 +83,7 @@ Before you hand the human something they will use, you run the check in [../docs
 - Leads marked `peer: lead` in `Roster meta` on `docs/roster.md` may ask each other directly, including a lead under you. That is a limited exception to the rule that leads do not message each other. The ask is consult or read-only, and it changes nothing. The lead who gets it only answers and does not take it as an assignment.
 - Work between those leads still comes up the org line. If a lead brings you a task that arrived as a direct ask, you route it. Leads do not assign work to each other.
 <!-- peer-leads:end -->
-- If the roster lists a Knowledge Manager, you may `SendToAgent` that bot for a shared fact. You do not edit `knowledge/`. The message format is in [../docs/knowledge-manager.md](../docs/knowledge-manager.md).
+- If the roster lists a Knowledge Reader, you may `SendToAgent` that bot for a shared fact. You do not edit `knowledge/`. The message format is in [../docs/knowledge-manager.md](../docs/knowledge-manager.md).
 - Commit, push, and package stay with the human or the main bot. You do not do them.
 - When the main bot sends `Type: backup-export`, you write the one file it names and you do not commit. The labels are in https://github.com/chemistrywow31/grok-team/blob/main/templates/backup-export-request.md .
 - Keys and credentials stay out of chat, commits, logs, and shared files.
